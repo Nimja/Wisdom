@@ -1,103 +1,45 @@
 {
     "sentences": [
-        "The quest of NAME: ^OBJECTIVE LOCATION.",
+        "_^NAME dreams..._ ^WHAT WHO WHY.",
+        "_^NAME dreams..._ ^WHAT WHO WHY.\nArriving WHERE, they HOW.",
+        "_^NAME dreams..._ ^WHAT WHO WHY. It all happened WHEN.",
+        "_^NAME dreams..._ ^It was WHEN when they got to WHERE, WHY for WHO.",
         [
-            "_NAME",
+            "_^NAME dreams..._ ^HOW WHEN.",
             [
-                "will dream of_...",
-                "might dream of_...",
-                "once dreamt of_...",
-                "might be thinking of_...",
-                "is daydreaming of_...",
-                "considered_..."
-            ],
-            "^OBJECTIVE LOCATION."
-        ],        
-        [
-            "^LOCATION,",
-            [
-                "the prime",
-                "no better",
-                "the ideal",
-                "a good",
-                "a decent",
-                "a fantastic",
-                "an interesting"
-            ],
-            " place for OBJECTIVE...",
-            [
-                "Or so NAME thought!",
-                "At least, such it was told to NAME.",
-                "As it was foretold to NAME.",
-                "As NAME was hoping.",
-                "All according to NAME's plans."
+                "It was only possible with WHO.",
+                "It couldn't be done without WHO.",
+                "It had to be done for WHO.",
+                "It would be nice for WHO.",
+                "It was a race against WHO!",
+                "Could it be found WHERE?"
             ]
-        ],
-        [
-            [
-                "It was late at night when",
-                "One early morning"
-            ],
-            "NAME was OBJECTIVE LOCATION.\n\n",
-            [
-                "But, not everyone dared to go LOCATION.",
-                "However, was NAME the right one for OBJECTIVE?",
-                "Of course, NAME could do it!",
-                "What will happen next?"
-            ]
-        ]       
+        ]
     ],
-    "objective": [
+    "who": [
         [
             [
-                "finding",
-                "stealing",
-                "discovering",
-                "protecting"
+                "dancing",
+                "singing",
+                "playing",
+                "travelling",
+                "wandering",
+                "juggling",
+                "tumbling",
+                "",
+                "",
+                "",
+                "",
+                ""
             ],
-            "the",
             [
-                "lost",
-                "elusive",
-                "mysterious",
-                "precious",
-                "impossible"
-            ],
-            [
-                "pale blue",
                 "pink",
-                "grey",
+                "red",
+                "blue",
+                "indigo",
                 "rainbow",
-                "incandescent",
-                "invisible"
-            ],
-            [
-                "emerald",
-                "crystal",
-                "diamond",
-                "question"
-            ]
-        ],
-        [
-            [
-                "traveling with",
-                "adventuring with",
-                "dancing with",
-                "dancing for",
-                "dancing to",
-                "singing with",
-                "singing for",
-                "singing to",
-                "walking with",
-                "walking to",
-                "flying with",
-                "flying to",
-                "juggling for",
-                "petting",
-                "relaxing together with",
-                "sneaking around"
-            ],
-            [
+                "squishy",
+                "fluffy",
                 "gingerbread",
                 "giggling",
                 "fluttering",
@@ -107,8 +49,7 @@
                 "fluffy",
                 "secret",
                 "cotton-candy",
-                "sparkling",
-                "dancing",
+                "sparkly",
                 "random",
                 "strange",
                 "silly",
@@ -122,7 +63,12 @@
                 "small",
                 "giant",
                 "lovely",
-                "sweet"
+                "sweet",
+                "",
+                "",
+                "",
+                "",
+                ""
             ],
             [
                 "armadillos",
@@ -139,11 +85,74 @@
                 "teddybears",
                 "thieves",
                 "unicorns",
-                "walking candy-canes"
+                "walking candy-canes",
+                "teddybears"
             ]
         ]
     ],
-    "location": [
+    "what": [
+        "the quest for",
+        "the search for",
+        "looking for",
+        "looking for a present for",
+        "wanting to surprise",
+        "spending some time with",
+        "going on an adventure with",
+        "adventuring with"
+    ],
+    "why": [
+        [
+            [
+                "to rescue",
+                "to defeat",
+                "to twist",
+                "to save",
+                "to save"
+            ],
+            [
+                "the day",
+                "the treasure",
+                "the rainbow",
+                "the world",
+                "the city",
+                "the country",
+                "the enemy",
+                "the villain",
+                "the grand vizier",
+                "the hero",
+                "the megamuffin",
+                "the princess",
+                "the prince"
+            ]
+        ],
+        [
+            "because",
+            [
+                "it's important",
+                "nobody else would",
+                "it's the right thing to do",
+                "it's awesome",
+                "it's okay, I guess",
+                "why not"
+            ]
+        ],
+        [
+
+            [
+                "to better",
+                "to improve",
+                "to change",
+                "to discover"
+            ],
+            [
+                "yourself",
+                "the world",
+                "a stranger",
+                "today"
+            ]
+        ]
+    ],
+    "where": [
         [
             [
                 "on top of",
@@ -162,6 +171,8 @@
                 "a magical",
                 "a strange",
                 "a crystalline",
+                "the",
+                "the",
                 "a",
                 "a",
                 "a"
@@ -175,6 +186,9 @@
                 "temple",
                 "mansion",
                 "restaurant",
+                "flower",
+                "bush",
+                "snowflake",
                 "castle"
             ]
         ],
@@ -190,12 +204,16 @@
                 "a lush",
                 "a murky",
                 "a snowy",
+                "a",
+                "a",
                 "a"
             ],
             [
                 "swamp",
                 "valley",
+                "river",
                 "field of mushrooms",
+                "field of mysteries",
                 "field of flowers"
             ]
         ],
@@ -213,21 +231,28 @@
                 "mysterious",
                 "wonderful",
                 "labyrinthian",
-                "underground"
+                "underground",
+                "",
+                "",
+                ""
             ],
             [
                 "caverns,",
                 "caves,",
                 "tunnels,",
+                "oceans,",
                 "catacombs,"
             ],
             [
                 "lit by glowing fireflies",
-                "lit by glowing crystals",
+                "lit by crystals",
                 "smelling faintly of flowers",
                 "underground",
                 "far away",
-                "in far off lands"
+                "in far off lands",
+                "not on any maps",
+                "still lost",
+                "like a dream"
             ]
         ],
         [
@@ -251,5 +276,51 @@
         "deep under the ocean",
         "over the rainbow",
         "high in the sky"
+    ],
+    "how": [
+        [
+            [
+                "unlock",
+                "find",
+                "search for",
+                "destroy",
+                "manipulate",
+                "rewrite",
+                "discover",
+                "reveal",
+                "trigger"
+            ],
+            [
+                "an ancient",
+                "the foretold",
+                "the legendary",
+                "the",
+                "nobody's",
+                "a",
+                "a",
+                "a"
+            ],
+            [
+                "mystery",
+                "truth",
+                "secret",
+                "legend",
+                "lore",
+                "tome",
+                "book",
+                "delicious apple pie recipe"
+            ]
+        ]
+    ],
+    "when": [
+        "late at night",
+        "around midnight",
+        "around midday",
+        "just after noon",
+        "only yesterday",
+        "recently",
+        "a while ago",
+        "once upon a time",
+        "some time"
     ]
 }

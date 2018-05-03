@@ -17,11 +17,15 @@
     ],
     "yesno": [
         "yes",
+        "yes",
+        "yes",
+        "no",
+        "no",
         "no",
         "maybe"
     ],
     "unless": [
-        [   
+        [
             "unless NAME",
             [
                 "has red hair",
@@ -31,8 +35,8 @@
                 "drank water in the last 30 minutes",
                 "wrote this"
             ]
-        ],        
-        [   
+        ],
+        [
             "unless today",
             [
                 "has a full moon",
@@ -42,10 +46,11 @@
                 "is Thursday",
                 "is Friday",
                 "is Saturday",
-                "is Sunday"
+                "is Sunday",
+                "someone mentioned Bettlejuice 3 times"
             ]
-        ],        
-        [   
+        ],
+        [
             "unless NAME is secretly",
             [
                 "a werewolf",
@@ -56,7 +61,6 @@
                 "the president"
             ]
         ],
-        "unless someone just mentioned beetlejuice",
         "unless... nevermind"
     ],
     "probably": [
@@ -64,18 +68,18 @@
         "but it's not backed up by the numbers",
         "although I could be wrong",
         "but nobody is ever certain",
-        "I heard from accross the street",
+        "I heard from across the street",
         "according to someone online",
         "or so the news tells me",
         "I mean it could be",
         "probably"
-        
+
     ],
     "definitely": [
         "there is no doubt",
         "everyone knows",
         "it is certain",
         "certainly",
-        "definitely"        
+        "definitely"
     ]
 }

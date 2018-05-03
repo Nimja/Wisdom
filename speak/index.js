@@ -5,6 +5,11 @@ var Speak = function () {
     this.init();
 };
 
+// Export if in nodejs.
+if (isNode) {
+    module.exports = Speak;
+}
+
 Speak.prototype = {
     init: function () {
         if (isNode) {
@@ -23,15 +28,18 @@ Speak.prototype = {
         return Array.isArray(arr) ? arr[Math.floor(Math.random() * arr.length)] : arr;
     },
     getPart: function (parts) {
-        var random = this.getRandom(parts);
-        if (Array.isArray(random)) {
+        var cur = this.getRandom(parts);
+        if (Array.isArray(cur)) {
             var result = [];
-            for (var index in random) {
-                result.push(this.getPart(random[index]));
+            for (var index in cur) {
+                var part = this.getPart(cur[index]);
+                if (part.length > 0) {
+                    result.push(part);
+                }
             }
             return result.join(' ');
         } else {
-            return random;
+            return cur;
         }
     },
     getSentence: function (dict, username) {
@@ -58,8 +66,3 @@ Speak.prototype = {
         return sentence;
     }
 };
-
-
-if (isNode) {
-    module.exports = Speak;
-}

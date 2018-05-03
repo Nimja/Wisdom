@@ -11,14 +11,19 @@ A discord bot that has a few simple commands.
 * Web server with PHP/htaccess support - For the example page.
 * [Setup Discord bot](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token)
 
+## Configuration
+All config is in config.json.
+
+* `token` - The token from setting up the discord bot.
+* `prefix` - The token from setting up the discord bot.
+* `timeout` - int seconds - Timeout to prevent spamming/flooding.
+* `idle_channels` - array of string - Channel names (without \#) in which we do idle monitoring.
+* `idle_timeout` - int seconds - After how long the bot will say something automatically. Min 60 seconds.
+
 ## Installation
 
 * Check out repository.
-* Edit `config.json` - Add token. And change the prefix, if you want to.
 * Run: `npm install .` - To install dependencies.
-
-## Starting
-
 * Run: `node wisdom`
 
 ## Commands

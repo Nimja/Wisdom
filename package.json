@@ -1,12 +1,21 @@
-{  
-   "name":"Wisdom",
-   "version":"1.0",
-   "description":"The wonderful wanderer, who wills wisdom willingly.",
-   "main":"wisdom.js",
-   "author":"Nimja",
-   "homepage":"https://wisdom.nimja.com/",
-   "dependencies":{  
-      "discord.io":"github:woor/discord.io#gateway_v6"
-   },
-   "license":"MIT"
+{
+  "name": "Wisdom",
+  "version": "1.0.0",
+  "description": "The wonderful wanderer, who wills wisdom willingly.",
+  "main": "wisdom.js",
+  "author": "Nimja",
+  "homepage": "https://wisdom.nimja.com/",
+  "dependencies": {
+    "discord.js": "^11.3.2"
+  },
+  "keywords": [
+    "Discord Bot"
+  ],
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "contributors": "Nimja",
+  "repository": "github.com:Nimja/Wisdom.git",
+  "bugs": "https://github.com/Nimja/Wisdom/issues",
+  "license": "MIT"
 }
