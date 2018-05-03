@@ -1,0 +1,12 @@
+{  
+   "name":"Wisdom",
+   "version":"1.0",
+   "description":"The wonderful wanderer, who wills wisdom willingly.",
+   "main":"wisdom.js",
+   "author":"Nimja",
+   "homepage":"https://wisdom.nimja.com/",
+   "dependencies":{  
+      "discord.io":"github:woor/discord.io#gateway_v6"
+   },
+   "license":"MIT"
+}

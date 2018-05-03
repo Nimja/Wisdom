@@ -1,0 +1,81 @@
+{
+    "sentences": [
+        "^YESNO, UNLESS.",
+        "^YESNO, PROBABLY.",
+        "^YESNO, DEFINITELY.",
+        "^PREFIX YESNO, UNLESS.",
+        "^PREFIX YESNO, PROBABLY.",
+        "^PREFIX YESNO, DEFINITELY."
+    ],
+    "prefix": [
+        "definitely",
+        "probably",
+        "possibly",
+        "most people say",
+        "someone said",
+        "nobody said"
+    ],
+    "yesno": [
+        "yes",
+        "no",
+        "maybe"
+    ],
+    "unless": [
+        [   
+            "unless NAME",
+            [
+                "has red hair",
+                "is blonde",
+                "starts with a vowel",
+                "is using a keyboard",
+                "drank water in the last 30 minutes",
+                "wrote this"
+            ]
+        ],        
+        [   
+            "unless today",
+            [
+                "has a full moon",
+                "is Monday",
+                "is Tuesday",
+                "is Wednesday",
+                "is Thursday",
+                "is Friday",
+                "is Saturday",
+                "is Sunday"
+            ]
+        ],        
+        [   
+            "unless NAME is secretly",
+            [
+                "a werewolf",
+                "undercover",
+                "a robot",
+                "a bot as well",
+                "not real",
+                "the president"
+            ]
+        ],
+        "unless someone just mentioned beetlejuice",
+        "unless... nevermind"
+    ],
+    "probably": [
+        "according to statistics, I think",
+        "but it's not backed up by the numbers",
+        "although I could be wrong",
+        "but nobody is ever certain",
+        "I heard from accross the street",
+        "according to someone online",
+        "or so the news tells me",
+        "I mean it could be",
+        "probably"
+        
+    ],
+    "definitely": [
+        "there is no doubt",
+        "everyone knows",
+        "it is certain",
+        "certainly",
+        "definitely"        
+    ]
+}
