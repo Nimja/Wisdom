@@ -67,7 +67,10 @@ client.on('message', msg => {
     } else {
         switch (cmd) {
             case 'who':
-                var message = package.name + ' v' + package.version + ' - ' + package.description;
+                var message = package.name + ' v'
+                        + package.version + ' - '
+                        + package.description
+                        + "\n\nSee more at: " + package.homepage;
                 channel.sendMessage(message);
                 break;
         }

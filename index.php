@@ -1,15 +1,16 @@
+<?php $package = json_decode(file_get_contents('package.json')); ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
-        <meta name="description" content="A wise discord bot.">
+        <meta name="description" content="<?= $package->description ?>">
         <meta name="referrer" content="origin">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Nimja.com">
-        <meta property="og:title" content="Wisdom - ">
-        <meta property="og:description" content="A wise discord bot.">
-        <meta property="og:url" content="https://wisdom.nimja.com/"/>
-        <title>Wisdom</title>
+        <meta name="author" content="<?= $package->author ?>">
+        <meta property="og:title" content="<?= $package->name ?> - Example page">
+        <meta property="og:description" content="<?= $package->description ?>">
+        <meta property="og:url" content="<?= $package->homepage ?>"/>
+        <title><?= $package->name ?> - Example Page</title>
         <style>
             html {
                 font-family: arial;
@@ -31,12 +32,13 @@
                 padding: 10px;
                 font-size: 150%;
                 margin: 20px 20%;
+                border: 1px solid #161c34;
             }
         </style>
     </head>
     <body>
-        <h1>Example page for Wisdom</h1>
-        <h2>A wise Discord Bot. <a href="https://github.com/Nimja/Wisdom#readme">View on GitHub</a></h2>
+        <h1><?= $package->name ?> - v<?= $package->version ?> - Example page</h1>
+        <h2><?= $package->description ?><br /><a href="https://github.com/Nimja/Wisdom#readme">Source on GitHub</a></h2>
         <div class="buttons">
             <?php
             $buttons = [];
