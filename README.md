@@ -15,7 +15,7 @@ A discord bot that has a few simple commands.
 All config is in config.json.
 
 * `token` - The token from setting up the discord bot.
-* `prefix` - The token from setting up the discord bot.
+* `prefix` - The prefix character for the bot commands - default: !
 * `timeout` - int seconds - Timeout to prevent spamming/flooding.
 * `idle_channels` - array of string - Channel names (without \#) in which we do idle monitoring.
 * `idle_timeout` - int seconds - After how long the bot will say something automatically. Min 60 seconds.
