@@ -1,11 +1,11 @@
-// Load configuration and package information.
+// Load configuration.
 var config = require('./config.json');
-var package = require('./package.json');
 
 // Load the speak packages.
 var Speak = require('./speak');
 var Spamfilter = require('./speak/spamfilter.js');
 var Idle = require('./speak/idle.js');
+var copyright = require('./speak/copyright.js');
 
 // Load the Discord bot.
 var Discord = require('discord.js');
@@ -40,6 +40,7 @@ client.on('message', msg => {
         return;
     }
     var channel = msg.channel;
+    var isDm = channel.type === 'dm';
     // Update idle timer.
     idle.update(channel);
 
@@ -50,10 +51,9 @@ client.on('message', msg => {
     }
 
     // Check for spamming (with a timeout per userId).
-    var timeout = channel.type !== 'dm' ? spamfilter.getTimeout(user.id) : 0;
+    var timeout = isDm ? 0 : spamfilter.getTimeout(user.id);
     if (timeout > 0) {
-        var message = "Not too often... You need to wait " + timeout + " more seconds...";
-        user.sendMessage(message);
+        user.send("Patience, " + user.name + "... " + timeout + " more seconds. In private is fine though.");
         return;
     }
 
@@ -63,15 +63,11 @@ client.on('message', msg => {
     args = args.splice(1);
     if (speak.hasDict(cmd)) {
         var message = speak.getSentence(cmd, user.username);
-        channel.sendMessage(message);
+        channel.send(message);
     } else {
         switch (cmd) {
             case 'who':
-                var message = package.name + ' v'
-                        + package.version + ' - '
-                        + package.description
-                        + "\n\nSee more at: " + package.homepage;
-                channel.sendMessage(message);
+                channel.send(copyright(isDm));
                 break;
         }
     }

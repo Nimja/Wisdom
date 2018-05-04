@@ -1,28 +1,47 @@
 {
     "sentences": [
-        "^YESNO, UNLESS.",
-        "^YESNO, PROBABLY.",
-        "^YESNO, DEFINITELY.",
-        "^PREFIX YESNO, UNLESS.",
-        "^PREFIX YESNO, PROBABLY.",
-        "^PREFIX YESNO, DEFINITELY."
-    ],
-    "prefix": [
-        "definitely",
-        "probably",
-        "possibly",
-        "most people say",
-        "someone said",
-        "nobody said"
+        [
+            "_NAME_ -",
+            [
+                "DEFINITELY",
+                "REASONABLY",
+                "PROBABLY",
+
+                "UNCLEAR",
+
+                "NEGATIVE",
+                "TENTATIVE",
+
+                "^YESNO, UNLESS.",
+                "^YESNO, LIKELY."
+            ]
+        ]
     ],
     "yesno": [
-        "yes",
-        "yes",
-        "yes",
-        "no",
-        "no",
-        "no",
-        "maybe"
+        [
+            [
+                "definitely",
+                "probably",
+                "possibly",
+                "most people say",
+                "someone said",
+                "some say",
+                "",
+                "",
+                "",
+                ""
+            ],
+            [
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "yes",
+                "no",
+                "no",
+                "maybe"
+            ]
+        ]
     ],
     "unless": [
         [
@@ -47,7 +66,7 @@
                 "is Friday",
                 "is Saturday",
                 "is Sunday",
-                "someone mentioned Bettlejuice 3 times"
+                "someone mentioned Beetlejuice 3 times"
             ]
         ],
         [
@@ -63,23 +82,102 @@
         ],
         "unless... nevermind"
     ],
-    "probably": [
-        "according to statistics, I think",
-        "but it's not backed up by the numbers",
-        "although I could be wrong",
-        "but nobody is ever certain",
-        "I heard from across the street",
-        "according to someone online",
-        "or so the news tells me",
-        "I mean it could be",
-        "probably"
-
+    "likely": [
+        "according to ancient texts",
+        "it's incredibly likely",
+        "it's somewhat likely",
+        "according to chance",
+        "so the cards speak",
+        "according to fate",
+        "according to fate",
+        "I flipped a coin",
+        "I rolled 1d6",
+        "as I devined",
+        "should be"
     ],
     "definitely": [
-        "there is no doubt",
-        "everyone knows",
-        "it is certain",
-        "certainly",
-        "definitely"
+        "Yes, according to everyone.",
+        "Yes, you may rely on it.",
+        "Yes, there is no doubt.",
+        "Yes, it is certain.",
+        "Yes, decidedly so.",
+        "Yes! Critical hit!",
+        "Yes, as I see it.",
+        "Yes, definitely.",
+        "Yes, certainly.",
+        "Yes! Yes! YES!",
+        "Yes"
+    ],
+    "reasonably": [
+        "Yes, most people would say so.",
+        "Yes, some people would say so.",
+        "I think most would say yes.",
+        "Okay, because it's you.",
+        "Yes, it seems so...",
+        "Signs point to yes.",
+        "Yes, it's alright.",
+        "But... Well, yes.",
+        "The cards say... Yes.",
+        "Yes! I think..."
+    ],
+    "probably": [
+        "Yes... But it's not backed up by the numbers.",
+        "Yes, according to statistics, I think...",
+        "Yes, I heard from across the street.",
+        "Yes, according to someone online.",
+        "Yes, but nobody is ever certain.",
+        "Yes? Although I could be wrong.",
+        "Yes, almost certainly. Almost.",
+        "Yes, or so the news tells me.",
+        "Yes. I mean it could be?",
+        "Yes. Probably."
+    ],
+    "unclear": [
+        "I had an answer for you here... somewhere.",
+        "Concentrate and ask again... In a while.",
+        "_Ruffles paper_ ... I lost the answer.",
+        "I could answer... but I won't.",
+        "Better not tell you now.",
+        "The answer is unclear.",
+        "Predicting is hard.",
+        "I'm a bit tired.",
+        "I wish I knew.",
+        "I'm not sure.",
+
+        "If you want to take that risk...",
+        "It could be...",
+        "Possibly...",
+        "I mean, maybe...",
+        "Yes... No! Eh... Yes-ish?",
+        "Maybe tomorrow?",
+        "Maybe another time?",
+        "Maybe, I guess?",
+        "Well, it went okay last time.",
+        "Maybe?"
+    ],
+    "negative": [
+        "No, according to my sources.",
+        "No, don't count on it.",
+        "The cards say... No.",
+        "No, too much doubt.",
+        "No, of course not.",
+        "No! Critical fail!",
+        "No, not at all.",
+        "No, as I see it",
+        "Noooooooo!",
+        "No...",
+        "No."
+    ],
+    "tentative": [
+        "No, it's probably dangerous.",
+        "No, I don't think so.",
+        "No, it's unreliable.",
+        "No, it's uncertain.",
+        "No, probably not.",
+        "No, better not.",
+        "No, not today.",
+        "No, let's not.",
+        "No, don't?",
+        "No?"
     ]
 }

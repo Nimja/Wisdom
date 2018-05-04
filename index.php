@@ -27,6 +27,12 @@
                 margin: 5px;
                 padding: 10px;
             }
+            #count {
+                border: 1px solid #161c34;
+                font-size: 150%;
+                padding: 10px;
+                width: 45px;
+            }
             #output {
                 text-align: center;
                 padding: 10px;
@@ -58,6 +64,8 @@
             }
             echo implode(PHP_EOL, $buttons);
             ?>
+            <b>X</b>
+            <input type="number" id="count" value="1" min="1" max="50" />
         </div>
         <div id="output">Click a button above!</div>
         <script>
@@ -65,17 +73,28 @@
 
             var buttons = document.getElementsByClassName("button");
             var output = document.getElementById("output");
+            var max = 1;
             // Generate the output and put it in the output.
             var updateOutput = function (evt) {
                 evt.preventDefault();
                 var dict = this.dataset.dict;
-                var sentence = speak.getSentence(dict, '<b>Name</b>');
-                output.innerHTML = sentence.replace(/\n/g, '<br />');
+                var results = [];
+                for (var i = 0; i < max; i++) {
+                    var sentence = speak.getSentence(dict, '<b>Name</b>');
+                    results.push(sentence.replace(/\n/g, '<br />'));
+                }
+                output.innerHTML = results.join('<br /><br />');
             };
             // Add event listeners.
             for (var i = 0; i < buttons.length; i++) {
                 buttons[i].addEventListener('click', updateOutput, false);
             }
+            document.getElementById("count").addEventListener(
+                    'change', function () {
+                        max = Math.max(1, Math.min(50, parseInt(this.value)));
+                        this.value = max;
+                    }
+            );
         </script>
         <div class="copyright">
             Copyright 2018 &copy; <a href="https://nimja.com">Nimja.com</a><br />
