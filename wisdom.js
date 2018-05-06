@@ -18,7 +18,7 @@ client.on('error', error => {
 // Reporting we have connected.
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    client.user.setStatus('invisible');
+    client.user.setStatus(config.bot_status);
 });
 
 // Handle a message.
