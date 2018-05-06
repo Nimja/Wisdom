@@ -9,6 +9,11 @@ var Idle = function (speak, channels, timeout) {
 };
 module.exports = Idle;
 Idle.prototype = {
+    /**
+     * Set a timeout for this channel, if we use it.
+     *
+     * @param {type} channel
+     */
     update: function(channel) {
         if (this.channels.indexOf(channel.name) < 0) {
             return;
@@ -19,6 +24,11 @@ Idle.prototype = {
         }
         this.timeouts[channel.id] = setTimeout(this.sendIdle.bind(this, channel), 1000 * this.timeout);
     },
+    /**
+     * Send a message to this channel.
+     *
+     * @param {type} channel
+     */
     sendIdle: function(channel) {
         channel.sendMessage(this.speak.getSentence('idle', 'Nobody'));
     }

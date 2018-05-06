@@ -4,6 +4,7 @@
 var package = require('./../package.json');
 module.exports = function (useEmbed) {
     if (useEmbed) {
+        // Pretty formatting.
         var message = {embed: {
                 color: 4215449,
                 title: "Hello, I am " + package.name,
@@ -15,6 +16,7 @@ module.exports = function (useEmbed) {
                 ]
             }};
     } else {
+        //Basic formatting.
         var message = package.name + ' v'
                 + package.version + ' - '
                 + package.description
