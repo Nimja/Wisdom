@@ -5,9 +5,8 @@ var config = require('./config.json');
 var Bot = require('./wisdom/bot.js');
 var Discord = require('discord.js');
 
-console.log('Initializing...');
-
 // Initialize Discord Bot
+console.log('Initializing...');
 var client = new Discord.Client();
 var bot = new Bot(config);
 
