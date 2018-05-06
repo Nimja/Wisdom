@@ -1,24 +1,15 @@
 // Load configuration.
 var config = require('./config.json');
 
-// Load the speak packages.
-var Speak = require('./speak');
-var Spamfilter = require('./speak/spamfilter.js');
-var Idle = require('./speak/idle.js');
-var copyright = require('./speak/copyright.js');
-
-// Load the Discord bot.
+// Load libraries.
+var Bot = require('./wisdom/bot.js');
 var Discord = require('discord.js');
-
-// Setup speak, spamfilter and idle timer.
-var speak = new Speak();
-var spamfilter = new Spamfilter(config.timeout, speak.commands.concat(['who']));
-var idle = new Idle(speak, config.idle_channels, config.idle_timeout);
 
 console.log('Initializing...');
 
 // Initialize Discord Bot
 var client = new Discord.Client();
+var bot = new Bot(config);
 
 // Report errors, if/when they occur.
 client.on('error', error => {
@@ -31,42 +22,10 @@ client.on('ready', () => {
     client.user.setStatus('invisible');
 });
 
-client.login(config.token);
-
+// Handle a message.
 client.on('message', msg => {
-    var user = msg.author;
-    //Don't react to bots.
-    if (user.bot) {
-        return;
-    }
-    var channel = msg.channel;
-    var isDm = channel.type === 'dm';
-    // Update idle timer.
-    idle.update(channel);
-
-    var message = msg.content;
-    // Only act on commands starting with the prefix (default: !).
-    if (message.substring(0, 1) !== config.prefix) {
-        return;
-    }
-    
-    //Handle command.
-    var args = message.substring(1).split(' ');
-    var cmd = args[0];
-    args = args.splice(1);
-
-    if (!isDm && spamfilter.isSpam(cmd, user)) {
-        return;
-    }
-    
-    if (speak.hasDict(cmd)) {
-        var message = speak.getSentence(cmd, user.username);
-        channel.send(message);
-    } else {
-        switch (cmd) {
-            case 'who':
-                channel.send(copyright(isDm));
-                break;
-        }
-    }
+    bot.handleMessage(msg);
 });
+
+// Do actual login.
+client.login(config.token);

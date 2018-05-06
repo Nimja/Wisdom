@@ -1,14 +1,10 @@
-var SpamFilter = function (timeout, commands) {
+var SpamFilter = function (timeout) {
     this.timeout = parseInt(timeout);
-    this.commands = commands;
     this.timestamps = {};
 };
 module.exports = SpamFilter;
 SpamFilter.prototype = {
-    isSpam: function(cmd, user) {
-        if (this.commands.indexOf(cmd) < 0) {
-            return false;
-        }
+    isSpam: function(user) {
         // Check for spamming (with a timeout per userId).
         var timeout = this.getTimeout(user.id);
         if (timeout > 0) {

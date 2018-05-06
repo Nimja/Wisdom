@@ -17,7 +17,7 @@ Speak.prototype = {
             const fs = require('fs');
             var dicts = this.dicts;
             var commands = this.commands;
-            fs.readdirSync('speak/dicts').forEach(file => {
+            fs.readdirSync('wisdom/dicts').forEach(file => {
                 var baseName = file.replace(/\.[^/.]+$/, "");
                 dicts[baseName] = require('./dicts/' + file);
                 commands.push(baseName);

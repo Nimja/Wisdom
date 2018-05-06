@@ -49,10 +49,10 @@
             <?php
             $buttons = [];
             $script = [
-                file_get_contents('speak/index.js'),
+                file_get_contents('wisdom/speak.js'),
                 'var speak = new Speak();'
             ];
-            $dir = 'speak/dicts/';
+            $dir = 'wisdom/dicts/';
             foreach (scandir($dir) as $file) {
                 if ($file == '.' || $file === '..') {
                     continue;
