@@ -4,7 +4,13 @@
             "_NAME_ -",
             [
                 "DEFINITELY",
+                "DEFINITELY",
+                "DEFINITELY",
                 "REASONABLY",
+                "REASONABLY",
+                "REASONABLY",
+                "PROBABLY",
+                "PROBABLY",
                 "PROBABLY",
 
                 "UNCLEAR",
@@ -87,10 +93,10 @@
         "it's incredibly likely",
         "it's somewhat likely",
         "according to chance",
-        "so the cards speak",
         "according to fate",
         "according to fate",
         "I flipped a coin",
+        "so say the cards",
         "I rolled 1d6",
         "as I devined",
         "should be"

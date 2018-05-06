@@ -2,6 +2,7 @@ var isNode = typeof (window) === "undefined" && typeof (navigator) === "undefine
 
 var Speak = function () {
     this.dicts = {};
+    this.commands = [];
     this.init();
 };
 
@@ -15,9 +16,11 @@ Speak.prototype = {
         if (isNode) {
             const fs = require('fs');
             var dicts = this.dicts;
+            var commands = this.commands;
             fs.readdirSync('speak/dicts').forEach(file => {
                 var baseName = file.replace(/\.[^/.]+$/, "");
                 dicts[baseName] = require('./dicts/' + file);
+                commands.push(baseName);
             });
         }
     },

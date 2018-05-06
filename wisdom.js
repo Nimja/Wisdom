@@ -12,7 +12,7 @@ var Discord = require('discord.js');
 
 // Setup speak, spamfilter and idle timer.
 var speak = new Speak();
-var spamfilter = new Spamfilter(config.timeout);
+var spamfilter = new Spamfilter(config.timeout, speak.commands.concat(['who']));
 var idle = new Idle(speak, config.idle_channels, config.idle_timeout);
 
 console.log('Initializing...');
@@ -49,18 +49,16 @@ client.on('message', msg => {
     if (message.substring(0, 1) !== config.prefix) {
         return;
     }
-
-    // Check for spamming (with a timeout per userId).
-    var timeout = isDm ? 0 : spamfilter.getTimeout(user.id);
-    if (timeout > 0) {
-        user.send("Patience, " + user.name + "... " + timeout + " more seconds. In private is fine though.");
-        return;
-    }
-
+    
     //Handle command.
     var args = message.substring(1).split(' ');
     var cmd = args[0];
     args = args.splice(1);
+
+    if (!isDm && spamfilter.isSpam(cmd, user)) {
+        return;
+    }
+    
     if (speak.hasDict(cmd)) {
         var message = speak.getSentence(cmd, user.username);
         channel.send(message);
