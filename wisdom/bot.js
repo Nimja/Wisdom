@@ -16,9 +16,9 @@ var Bot = function (config) {
 module.exports = Bot;
 
 Bot.prototype = {
-    handleMessage: function(msg) {
+    handleMessage: function (msg) {
         var user = msg.author;
-        //Don't react to bots.
+        // Don't react to bots.
         if (user.bot) {
             return;
         }
@@ -28,7 +28,7 @@ Bot.prototype = {
         // Update idle timer.
         this.idle.update(channel);
 
-        var message = msg.content;
+        var message = msg.content.trim();
         // Only act on commands starting with the prefix (default: !).
         if (message.substring(0, 1) !== this.prefix) {
             return;
@@ -40,24 +40,33 @@ Bot.prototype = {
         if (!this.isValidCommand(cmd)) {
             return;
         }
+
+        // Store remainder words.
         args = args.splice(1);
 
+        // Prevent flooding/spamming if it's not DM.
         if (!isDm && this.spamFilter.isSpam(user)) {
             return;
         }
 
-        if (this.speak.hasDict(cmd)) {
-            var message = this.speak.getSentence(cmd, user.username);
-            channel.send(message);
-        } else {
-            switch (cmd) {
-                case 'who':
-                    channel.send(copyright(isDm));
-                    break;
-            }
+        // Switch between commands, bot-commands always take preference over speak commands.
+        switch (cmd) {
+            case 'who':
+                channel.send(copyright(isDm));
+                break;
+            default:
+                if (this.speak.hasDict(cmd)) {
+                    var message = this.speak.getSentence(cmd, user.username);
+                    channel.send(message);
+                }
         }
     },
-    isValidCommand: function(cmd) {
+    /**
+     * Return true if command is valid.
+     * @param {String} cmd
+     * @returns {Boolean}
+     */
+    isValidCommand: function (cmd) {
         return this.validCommands.indexOf(cmd) > -1;
     }
 };

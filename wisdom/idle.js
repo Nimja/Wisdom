@@ -15,13 +15,15 @@ Idle.prototype = {
      * @param {type} channel
      */
     update: function(channel) {
+        // Only set idle timers for channels we're monitoring.
         if (this.channels.indexOf(channel.name) < 0) {
             return;
         }
-        this.channel = channel;
+        // Clear the timer we've set for this channel.
         if (this.timeouts.hasOwnProperty(channel.id)) {
             clearTimeout(this.timeouts[channel.id]);
         }
+        // Set timer.
         this.timeouts[channel.id] = setTimeout(this.sendIdle.bind(this, channel), 1000 * this.timeout);
     },
     /**
@@ -30,6 +32,6 @@ Idle.prototype = {
      * @param {type} channel
      */
     sendIdle: function(channel) {
-        channel.sendMessage(this.speak.getSentence('idle', 'Nobody'));
+        channel.send(this.speak.getSentence('idle', 'Nobody'));
     }
 };
