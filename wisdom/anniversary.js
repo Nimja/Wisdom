@@ -1,9 +1,8 @@
 // Load the speak packages.
 var fs = require("fs");
 
-var Anniversary = function (client, channelId) {
+var Anniversary = function (client) {
     this.client = client;
-    this.channelId = channelId;
     this.channel = null;
 };
 
@@ -40,7 +39,7 @@ Anniversary.prototype = {
         }
         return result;
     },
-    init: function() {
-        this.channel = this.client.channels.get(this.channelId);
+    init: function(channel) {
+        this.channel = channel;
     }
 };

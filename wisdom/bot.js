@@ -7,10 +7,15 @@ var Anniversary = require('./anniversary.js');
 var schedule = require('node-schedule');
 
 var Bot = function (client, config) {
-    this.commands = ['who'];
+    this.commands = ['who', 'echo'];
+    this.client = client;
+    this.status = config.bot_status;
+    this.admins = config.admins;
     this.prefix = config.prefix;
+    this.defaultChannelId = config.default_channel_id;
+    this.channel;
     this.speak = new Speak();
-    this.anniversary = new Anniversary(client, config.anniversary_channel_id);
+    this.anniversary = new Anniversary(client);
     this.idle = new Idle(this.speak, config.idle_channels, config.idle_timeout);
     this.spamFilter = new SpamFilter(config.timeout);
     this.validCommands = this.speak.commands.concat(this.commands);
@@ -23,8 +28,14 @@ Bot.prototype = {
      * Init methods and set up scheduler.
      */
     init: function() {
-        this.anniversary.init();
-        schedule.scheduleJob('0 11 * * *', this.daily.bind(this));
+        this.client.user.setStatus(this.status);
+        this.channel = this.client.channels.get(this.defaultChannelId);
+        if (this.channel) {
+            this.anniversary.init(this.channel);
+            schedule.scheduleJob('0 11 * * *', this.daily.bind(this));
+        } else {
+            console.error("ERROR: Unable to load default channel, echo and anniversary will not work!");
+        }
     },
     /**
      * Daily jobs, this allows for actions not tied to a message.
@@ -55,15 +66,16 @@ Bot.prototype = {
             return;
         }
 
-        //Handle command, make it lowercase, strip additional non-alpha characters.
-        var args = message.substring(1).split(' ');
-        var cmd = args[0].toString().toLowerCase().replace(/^[^a-z]*([a-z]+).*$/, '$1');
+        // Split message between command and rest.
+        var matches = message.match(/^[^\w]*([\w]+)\s*(.*)$/);
+        if (matches === null) {
+            return;
+        }
+        var cmd = matches[1].toString().toLowerCase();
+        var rest = matches[2];
         if (!this.isValidCommand(cmd)) {
             return;
         }
-
-        // Store remainder words.
-        args = args.splice(1);
 
         // Prevent flooding/spamming if it's not DM.
         if (!isDm && this.spamFilter.isSpam(user)) {
@@ -74,6 +86,11 @@ Bot.prototype = {
         switch (cmd) {
             case 'who':
                 channel.send(copyright(isDm));
+                break;
+            case 'echo':
+                if (this.channel && this.isAdmin(user.id)) {
+                    this.channel.send(rest);
+                }
                 break;
             default:
                 if (this.speak.hasDict(cmd)) {
@@ -89,5 +106,13 @@ Bot.prototype = {
      */
     isValidCommand: function (cmd) {
         return this.validCommands.indexOf(cmd) > -1;
+    },
+    /**
+     * Return true if user is admin.
+     * @param {String} userId
+     * @returns {Boolean}
+     */
+    isAdmin: function(userId) {
+        return this.admins.indexOf(userId) > -1;
     }
 };

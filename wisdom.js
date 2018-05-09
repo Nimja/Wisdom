@@ -19,7 +19,6 @@ client.on('error', error => {
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     bot.init();
-    client.user.setStatus(config.bot_status);
 });
 
 // Handle a message.

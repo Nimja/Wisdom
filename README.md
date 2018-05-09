@@ -18,7 +18,7 @@ All config is in config.json.
 * `prefix` - The prefix character for the bot commands - default: !
 * `bot_status` - What status the bot should be. Values: `online`, `idle`, `invisible`, `dnd`
 * `timeout` - int seconds - Timeout to prevent spamming/flooding.
-* `anniversary_channel_id` - string - The channel on which we announce anniversary messages!
+* `default_channel_id` - string - Default channel for echo or anniversary messages.
 * `idle_channels` - array of string - Channel names (without \#) in which we do idle monitoring.
 * `idle_timeout` - int seconds - After how long the bot will say something automatically. Min 60 seconds.
 
@@ -31,6 +31,8 @@ All config is in config.json.
 ## Commands
 
 * `!who` - Report on who you are.
+* `!echo` - Repeat the following words.
 * `!dream` - Create a dream for the user.
 * `!advice` - Give some advice.
 * `!decide` - Like a magic 8-ball, returns a yes/no answer. Sort of.
+* `!question` - Ask a random question, to get conversations going.
