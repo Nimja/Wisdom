@@ -3,11 +3,14 @@ var Speak = require('./speak.js');
 var SpamFilter = require('./spamfilter.js');
 var Idle = require('./idle.js');
 var copyright = require('./copyright.js');
+var Anniversary = require('./anniversary.js');
+var schedule = require('node-schedule');
 
-var Bot = function (config) {
+var Bot = function (client, config) {
     this.commands = ['who'];
     this.prefix = config.prefix;
     this.speak = new Speak();
+    this.anniversary = new Anniversary(client, config.anniversary_channel_id);
     this.idle = new Idle(this.speak, config.idle_channels, config.idle_timeout);
     this.spamFilter = new SpamFilter(config.timeout);
     this.validCommands = this.speak.commands.concat(this.commands);
@@ -16,6 +19,24 @@ var Bot = function (config) {
 module.exports = Bot;
 
 Bot.prototype = {
+    /**
+     * Init methods and set up scheduler.
+     */
+    init: function() {
+        this.anniversary.init();
+        schedule.scheduleJob('0 11 * * *', this.daily.bind(this));
+    },
+    /**
+     * Daily jobs, this allows for actions not tied to a message.
+     */
+    daily: function() {
+        this.anniversary.callout();
+    },
+    /**
+     * Handle a message from Discord.
+     *
+     * @param {Message} msg
+     */
     handleMessage: function (msg) {
         var user = msg.author;
         // Don't react to bots.
@@ -34,9 +55,9 @@ Bot.prototype = {
             return;
         }
 
-        //Handle command.
+        //Handle command, make it lowercase, strip additional non-alpha characters.
         var args = message.substring(1).split(' ');
-        var cmd = args[0];
+        var cmd = args[0].toString().toLowerCase().replace(/^[^a-z]*([a-z]+).*$/, '$1');
         if (!this.isValidCommand(cmd)) {
             return;
         }

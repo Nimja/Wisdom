@@ -8,16 +8,17 @@ var Discord = require('discord.js');
 // Initialize Discord Bot
 console.log('Initializing...');
 var client = new Discord.Client();
-var bot = new Bot(config);
+var bot = new Bot(client, config);
 
 // Report errors, if/when they occur.
 client.on('error', error => {
-    console.log(error);
+    console.error(error);
 });
 
 // Reporting we have connected.
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    bot.init();
     client.user.setStatus(config.bot_status);
 });
 

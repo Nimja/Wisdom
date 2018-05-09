@@ -3,6 +3,7 @@
     "prefix": "!",
     "bot_status": "invisible",
     "timeout": 30,
+    "anniversary_channel_id": "PUT_ANNIVERSARY_CHANNEL_ID_HERE",
     "idle_channels": ["general"],
     "idle_timeout": 3600
 }

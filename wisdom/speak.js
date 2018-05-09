@@ -25,7 +25,7 @@ Speak.prototype = {
                 var extension = file.substr(dot + 1);
                 var baseName = file.substr(0, dot);
                 if (extension !== 'json') {
-                    console.log('ERROR: ' + file + ' not JSON file!');
+                    console.error('ERROR: ' + file + ' not JSON file!');
                     return;
                 }
                 var dict = require('./dicts/' + file);
@@ -33,7 +33,7 @@ Speak.prototype = {
                     dicts[baseName] = dict;
                     commands.push(baseName);
                 } else {
-                    console.log('ERROR: ' + file + ' is missing "sentences" property.');
+                    console.error('ERROR: ' + file + ' is missing "sentences" property.');
                 }
             });
         }
@@ -101,7 +101,6 @@ Speak.prototype = {
         var parts = this.getParts(dict);
         parts.NAME = username;
         var sentence = parts.SENTENCES;
-        console.log(parts);
         // Replace all parts.
         for (var index in parts) {
             sentence = sentence.replace(new RegExp(index, 'g'), parts[index]);
