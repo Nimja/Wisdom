@@ -9,15 +9,23 @@ var Anniversary = function (client) {
 module.exports = Anniversary;
 
 Anniversary.prototype = {
+    /**
+     * Call out people who have their anniversary.
+     */
     callout: function () {
         var anniversaries = this.getAnniversaries();
         var channel = this.channel;
+        var guild = channel.guild;
         for (var index in anniversaries) {
             var anniversary = anniversaries[index];
-            this.client.fetchUser(anniversary.id).then(function (user) {
-                var year =  anniversary.age > 1 ? ' years' : ' year';
-                channel.send(user.toString() + " has been supporting me for " + anniversary.age + year + ', today! Thank you so much!');
-            });
+            // We fetch users via the channel.guild so that we don't announce people who are no longer in the guild.
+            guild.fetchMember(anniversary.id, false)
+                .then(function (member) {
+                    var user = member.user;
+                    var year = anniversary.age > 1 ? ' years' : ' year';
+                    channel.send(user.toString() + " has been supporting me for " + anniversary.age + year + ', today! Thank you so much!');
+                })
+                .catch(); // Do nothing in case it's not found/invalid.
             break;
         }
     },
@@ -33,7 +41,7 @@ Anniversary.prototype = {
             var row = data[index],
                     date = new Date(row.date),
                     age = curDate.getYear() - date.getYear();
-            if (date.getMonth() === curDate.getMonth() && date.getDate() === curDate.getDate()) {
+            if (age > 0 && date.getMonth() === curDate.getMonth() && date.getDate() === curDate.getDate()) {
                 result.push({id: row.id, age: age});
             }
         }
