@@ -1,9 +1,9 @@
 /**
  * Simple package to display the "who" message, as copyright, sort of.
  */
-var package = require('./../package.json');
-module.exports = function (useEmbed) {
-    if (useEmbed) {
+var package = require('./../../package.json');
+module.exports = function (cmd, env) {
+    if (env.isDm) {
         // Pretty formatting.
         var message = {embed: {
                 color: 4215449,
@@ -22,5 +22,5 @@ module.exports = function (useEmbed) {
                 + package.description
                 + "\n\nUrl: " + package.homepage;
     }
-    return message;
+    env.channel.send(message);
 };

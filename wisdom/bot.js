@@ -1,8 +1,8 @@
 // Load the speak packages.
 var Speak = require('./speak.js');
+var Command = require('./command.js');
 var SpamFilter = require('./spamfilter.js');
 var Idle = require('./idle.js');
-var copyright = require('./copyright.js');
 var Anniversary = require('./anniversary.js');
 var schedule = require('node-schedule');
 
@@ -11,14 +11,13 @@ var Bot = function (client, config) {
     this.client = client;
     this.status = config.bot_status;
     this.admins = config.admins;
-    this.prefix = config.prefix;
     this.defaultChannelId = config.default_channel_id;
     this.channel;
     this.speak = new Speak();
+    this.command = new Command(config.prefix, this.speak);
     this.anniversary = new Anniversary(client);
     this.idle = new Idle(this.speak, config.idle_channels, config.idle_timeout);
     this.spamFilter = new SpamFilter(config.timeout);
-    this.validCommands = this.speak.commands.concat(this.commands);
 };
 
 module.exports = Bot;
@@ -55,57 +54,30 @@ Bot.prototype = {
             return;
         }
         var channel = msg.channel;
-        var isDm = channel.type === 'dm';
+        var isDm = msg.channel.type === 'dm';
+        var isAdmin = this.isAdmin(user.id);
 
         // Update idle timer.
         this.idle.update(channel);
 
-        var message = msg.content.trim();
-        // Only act on commands starting with the prefix (default: !).
-        if (message.substring(0, 1) !== this.prefix) {
-            return;
-        }
-
-        // Split message between command and rest.
-        var matches = message.match(/^[^\w]*([\w]+)\s*(.*)$/);
-        if (matches === null) {
-            return;
-        }
-        var cmd = matches[1].toString().toLowerCase();
-        var rest = matches[2];
-        if (!this.isValidCommand(cmd)) {
+        var cmd = this.command.getCommand(msg.content.trim());
+        if (!cmd) {
             return;
         }
 
         // Prevent flooding/spamming if it's not DM.
-        if (!isDm && this.spamFilter.isSpam(user)) {
+        if (!isDm && !isAdmin && this.spamFilter.isSpam(user)) {
             return;
         }
-
-        // Switch between commands, bot-commands always take preference over speak commands.
-        switch (cmd) {
-            case 'who':
-                channel.send(copyright(isDm));
-                break;
-            case 'echo':
-                if (this.channel && this.isAdmin(user.id)) {
-                    this.channel.send(rest);
-                }
-                break;
-            default:
-                if (this.speak.hasDict(cmd)) {
-                    var message = this.speak.getSentence(cmd, user.username);
-                    channel.send(message);
-                }
-        }
-    },
-    /**
-     * Return true if command is valid.
-     * @param {String} cmd
-     * @returns {Boolean}
-     */
-    isValidCommand: function (cmd) {
-        return this.validCommands.indexOf(cmd) > -1;
+        // Setup environment for command, and execute.
+        var env = {
+            isDm: isDm,
+            isAdmin: isAdmin,
+            defaultChannel: this.channel,
+            user: user,
+            channel: channel
+        };
+        this.command.execute(cmd, env);
     },
     /**
      * Return true if user is admin.

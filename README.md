@@ -28,10 +28,20 @@ Config should be put in config.json - An example is included in config.example.j
 * Run: `npm install .` - To install dependencies.
 * Run: `node wisdom`
 
-## Commands
+## Bot commands
+Each of the bot commands is kept in the related JS file in `wisdom/command/*.js`
+
+Adding a new file there automatically adds it to the bot.
 
 * `!who` - Report on who you are.
-* `!echo` - Repeat the following words.
+* `!echo` - Repeat the following words (only works for admin).
+* `!decide this or that` - Randomly selects one, can be or or comma.
+
+## Speak commands
+Each of the speak commands is kept in the related JSON file in `wisdom/dicts/*.json`
+
+Adding a new file there automatically adds it to the bot.
+
 * `!dream` - Create a dream for the user.
 * `!advice` - Give some advice.
 * `!decide` - Like a magic 8-ball, returns a yes/no answer. Sort of.
