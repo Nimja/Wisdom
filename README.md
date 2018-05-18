@@ -12,7 +12,7 @@ A discord bot that has a few simple commands.
 * [Setup Discord bot](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token)
 
 ## Configuration
-All config is in config.json.
+Config should be put in config.json - An example is included in config.example.json
 
 * `token` - The token from setting up the discord bot.
 * `prefix` - The prefix character for the bot commands - default: !

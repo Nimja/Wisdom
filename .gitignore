@@ -1,3 +1,7 @@
+# ----- Custom Ignores -----
+config.json
+
+# ----- NodeJS Ignores -----
 # Logs
 logs
 *.log
