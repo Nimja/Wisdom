@@ -3,6 +3,7 @@
     "prefix": "!",
     "bot_status": "invisible",
     "timeout": 30,
+    "welcome_joiners": true,
     "admins": ["PUT_ADMIN_USER_ID_HERE"],
     "default_channel_id": "PUT_ANNIVERSARY_CHANNEL_ID_HERE",
     "idle_channels": ["general"],

@@ -26,5 +26,11 @@ client.on('message', msg => {
     bot.handleMessage(msg);
 });
 
+if (config.welcome_joiners) {
+    client.on('guildMemberAdd', user => {
+        bot.handleJoin(user);
+    });
+}
+
 // Do actual login.
 client.login(config.token);

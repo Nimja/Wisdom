@@ -1,0 +1,12 @@
+{
+    "text": "Welcome to the guild!",
+    "embed": {
+        "color": 4215449,
+        "fields": [
+            {
+                "name": "Bot commands",
+                "value": "`!decide` - Answer a yes/no question, probably.\n`!choose this, that or something` else - Make a random choice.\n`!question` - Ask a question."
+            }
+        ]
+    }
+}

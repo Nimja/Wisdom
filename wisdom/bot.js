@@ -80,6 +80,27 @@ Bot.prototype = {
         this.command.execute(cmd, env);
     },
     /**
+     * Handle a message from Discord.
+     *
+     * @param {Message} msg
+     */
+    handleJoin: function (user) {
+        // Don't react to bots.
+        if (user.bot) {
+            return;
+        }
+        var isAdmin = this.isAdmin(user.id);
+        // Setup environment for command, and execute.
+        var env = {
+            isDm: true,
+            isAdmin: isAdmin,
+            defaultChannel: this.channel,
+            user: user,
+            channel: user
+        };
+        this.command.execute({command: 'intro', rest: ''}, env);
+    },
+    /**
      * Return true if user is admin.
      * @param {String} userId
      * @returns {Boolean}

@@ -18,6 +18,7 @@ Config should be put in config.json - An example is included in config.example.j
 * `prefix` - The prefix character for the bot commands - default: !
 * `bot_status` - What status the bot should be. Values: `online`, `idle`, `invisible`, `dnd`
 * `timeout` - int seconds - Timeout to prevent spamming/flooding.
+* `welcome_joiners` - boolean - Should we send a private message to new joiners?
 * `default_channel_id` - string - Default channel for echo or anniversary messages.
 * `idle_channels` - array of string - Channel names (without \#) in which we do idle monitoring.
 * `idle_timeout` - int seconds - After how long the bot will say something automatically. Min 60 seconds.
@@ -36,6 +37,7 @@ Adding a new file there automatically adds it to the bot.
 * `!who` - Report on who you are.
 * `!echo` - Repeat the following words (only works for admin).
 * `!decide this or that` - Randomly selects one, can be or or comma.
+* `!intro` - Repeat the intro text, goes to private message.
 
 ## Speak commands
 Each of the speak commands is kept in the related JSON file in `wisdom/dicts/*.json`
