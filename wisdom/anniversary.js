@@ -20,12 +20,15 @@ Anniversary.prototype = {
             var anniversary = anniversaries[index];
             // We fetch users via the channel.guild so that we don't announce people who are no longer in the guild.
             guild.fetchMember(anniversary.id, false)
-                .then(function (member) {
+                .then((member) => {
                     var user = member.user;
                     var year = anniversary.age > 1 ? ' years' : ' year';
                     channel.send(user.toString() + " has been supporting me for " + anniversary.age + year + ', today! Thank you so much!');
                 })
-                .catch(); // Do nothing in case it's not found/invalid.
+                .catch((error) => {
+                        console.log(error);
+                    }
+                ); // Do nothing in case it's not found/invalid.
             break;
         }
     },
