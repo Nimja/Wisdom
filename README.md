@@ -35,8 +35,8 @@ Each of the bot commands is kept in the related JS file in `wisdom/command/*.js`
 Adding a new file there automatically adds it to the bot.
 
 * `!who` - Report on who you are.
-* `!echo` - Repeat the following words (only works for admin).
-* `!decide this or that` - Randomly selects one, can be or or comma.
+* `!echo [channel] [message]` - Repeat the message on the specified channel. Only works for admins (see config).
+* `!decide this or that` - Randomly selects one, can be "or" or comma.
 * `!intro` - Repeat the intro text, goes to private message.
 
 ## Speak commands

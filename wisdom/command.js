@@ -40,7 +40,7 @@ Command.prototype = {
             return false;
         }
         // Split message between command and rest.
-        var matches = message.match(/^[^\w]*([\w]+)\s*(.*)$/);
+        var matches = message.match(/^[^\w]*([\w]+)\s*([\s\S]*)$/);
         if (matches === null) {
             return false;
         }

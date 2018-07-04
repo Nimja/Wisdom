@@ -62,7 +62,11 @@ Bot.prototype = {
 
         var cmd = this.command.getCommand(msg.content.trim());
         if (!cmd) {
-            return;
+            if (msg.isMentioned(this.client.user) && this.command.speak.hasDict('mentioned')) {
+                cmd= {command: 'mentioned', rest: ''};
+            } else {
+                return;
+            }
         }
 
         // Prevent flooding/spamming if it's not DM.
@@ -74,6 +78,7 @@ Bot.prototype = {
             isDm: isDm,
             isAdmin: isAdmin,
             defaultChannel: this.channel,
+            client: this.client,
             user: user,
             channel: channel
         };
@@ -95,6 +100,7 @@ Bot.prototype = {
             isDm: true,
             isAdmin: isAdmin,
             defaultChannel: this.channel,
+            client: this.client,
             user: user,
             channel: user
         };
