@@ -4,8 +4,12 @@
         "color": 4215449,
         "fields": [
             {
+                "name": "Rules",
+                "value": "Please read the #rules channel!"
+            },
+            {
                 "name": "Bot commands",
-                "value": "`!decide` - Answer a yes/no question, probably.\n`!choose this, that or something` else - Make a random choice.\n`!question` - Ask a question."
+                "value": "`!decide` - Answer a yes/no question, probably.\n`!choose this, that or something` else - Make a random choice.\n`!compliment` - Give you a compliment.\n`!dream` - Generate a (very) random dream.\n`!question` - Ask a random question.\n`!file` - Return random file."
             }
         ]
     }
