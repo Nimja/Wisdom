@@ -15,23 +15,8 @@ Anniversary.prototype = {
      */
     callout: function () {
         var anniversaries = this.getAnniversaries();
-        var channel = this.channel;
-        var guild = channel.guild;
         for (var index in anniversaries) {
-            var anniversary = anniversaries[index];
-            // We fetch users via the channel.guild so that we don't announce people who are no longer in the guild.
-            guild.fetchMember(anniversary.id, false)
-                    .then((member) => {
-                        var user = member.user;
-                        var year = anniversary.age > 1 ? ' years' : ' year';
-                        var message = getMessage(user.toString(), anniversary.age, year);
-                        channel.send(message);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    }
-                    ); // Do nothing in case it's not found/invalid.
-            break;
+            this.celebrateAnniversary(this.channel, anniversaries[index]);
         }
     },
     /**
@@ -52,25 +37,49 @@ Anniversary.prototype = {
         }
         return result;
     },
+    /**
+     * Celebrate anniversary for single user.
+     *
+     * @param {type} channel
+     * @param {Object} anniversary
+     */
+    celebrateAnniversary: async function (channel, anniversary) {
+        var guild = channel.guild;
+        // We fetch users via the channel.guild so that we don't announce people who are no longer in the guild.
+        try {
+            member = await guild.fetchMember(anniversary.id, false);
+            var user = member.user;
+            var year = anniversary.age > 1 ? ' years' : ' year';
+            var message = this.getMessage(user.toString(), anniversary.age, year);
+            channel.send(message);
+        } catch (error) {
+            // Do nothing in case it's not found/invalid.
+            console.log(error);
+        }
+    },
+    /**
+     * Get (random) message for anniversary.
+     * @param {String} user
+     * @param {Number} number
+     * @param {String} year
+     * @returns {String}
+     */
+    getMessage: function (user, number, year)
+    {
+        var message = messages[Math.floor(Math.random() * messages.length)];
+        var map = {USER: user, NUMBER: number, YEAR: year};
+        var re = new RegExp(Object.keys(map).join("|"), "g");
+        var parsed = message.replace(re, function (matched) {
+            return map[matched];
+        });
+        return parsed;
+    },
+    /**
+     * Allow channel to be set after construction.
+     *
+     * @param {type} channel
+     */
     init: function (channel) {
         this.channel = channel;
     }
 };
-
-/**
- * Get (random) message for anniversary.
- * @param {String} user
- * @param {Number} number
- * @param {String} year
- * @returns {String}
- */
-function getMessage(user, number, year)
-{
-    var message = messages[Math.floor(Math.random() * messages.length)];
-    var map = {USER: user, NUMBER: number, YEAR: year};
-    var re = new RegExp(Object.keys(map).join("|"), "g");
-    var parsed = message.replace(re, function (matched) {
-        return map[matched];
-    });
-    return parsed;
-}
