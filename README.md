@@ -36,7 +36,7 @@ Adding a new file there automatically adds it to the bot.
 
 * `!who` - Report on who you are.
 * `!echo [channel] [message]` - Repeat the message on the specified channel. Only works for admins (see config).
-* `!decide this or that` - Randomly selects one, can be "or" or comma.
+* `!choose this or that` - Randomly selects one, can be "or" or comma.
 * `!intro` - Repeat the intro text, goes to private message.
 
 ## Speak commands
@@ -44,7 +44,5 @@ Each of the speak commands is kept in the related JSON file in `wisdom/dicts/*.j
 
 Adding a new file there automatically adds it to the bot.
 
-* `!dream` - Create a dream for the user.
-* `!advice` - Give some advice.
-* `!decide` - Like a magic 8-ball, returns a yes/no answer. Sort of.
-* `!question` - Ask a random question, to get conversations going.
+* `!dream|advice|compliment|decide|question` - Simple commands that return a relevant reply.
+

@@ -1,3 +1,8 @@
+# ----- Custom Ignores -----	
+config.json	
+.vscode	
+
+# ----- NodeJS Ignores -----
 # Logs
 logs
 *.log

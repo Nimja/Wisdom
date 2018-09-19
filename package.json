@@ -1,5 +1,5 @@
 {
-  "name": "Wisdom",
+  "name": "nimja.wisdom",
   "version": "1.2.5",
   "description": "The wonderful wanderer, who wills wisdom willingly.",
   "main": "wisdom.js",
@@ -15,7 +15,7 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "contributors": "Nimja",
+  "contributors": ["Nimja"],
   "repository": "github.com:Nimja/Wisdom.git",
   "bugs": "https://github.com/Nimja/Wisdom/issues",
   "license": "MIT"
