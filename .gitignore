@@ -1,6 +1,7 @@
 # ----- Custom Ignores -----	
 config.json
 .vscode
+wisdom/data/anniversaries.json
 
 # ----- NodeJS Ignores -----
 # Logs
