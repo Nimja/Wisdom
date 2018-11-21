@@ -9,7 +9,7 @@
             },
             {
                 "name": "Bot commands",
-                "value": "`!decide` - Answer a yes/no question, probably.\n`!choose this, that or something` else - Make a random choice.\n`!compliment` - Give you a compliment.\n`!dream` - Generate a (very) random dream.\n`!question` - Ask a random question.\n`!file` - Return random file."
+                "value": "`!decide` - Answer a yes/no question, probably.\n`!choose this, that or something` else - Make a random choice.\n`!compliment` - Give you a compliment.\n`!hug` - Give you a hug.\n`!dream` - Generate a (very) random dream.\n`!question` - Ask a random question.\n`!file` - Return random file."
             }
         ]
     }

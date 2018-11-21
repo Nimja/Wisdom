@@ -1,4 +1,3 @@
-// Load the speak packages.
 var fs = require("fs");
 var messages = require('./data/anniversary_texts.json');
 

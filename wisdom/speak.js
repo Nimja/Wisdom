@@ -72,7 +72,7 @@ Speak.prototype = {
                     result.push(part);
                 }
             }
-            return result.join(' ');
+            return result.join(' ').replace(/\s([.,?!])/g, '$1');
         } else {
             return cur;
         }

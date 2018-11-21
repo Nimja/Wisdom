@@ -1,0 +1,51 @@
+{
+    "sentences": [
+        [
+            [
+                "_pulls NAME in for",
+                "_invites NAME in for",
+                "_motions for NAME to be ready for",
+                "_makes sure NAME is ready for",
+                "_grabs NAME for",
+                "_approaches NAME for",
+                "_makes sure NAME gets",
+                "_gives NAME",
+                "_gives NAME",
+                "_gives NAME",
+                "_gives NAME"
+            ],
+            [
+                "a firm hug",
+                "a tight hug",
+                "a big bear-hug",
+                "a big hug",
+                "a nice big hug",
+                "an enormous hug",
+                "the biggest of all hugs",
+                "a sweet portion of hugs",
+                "a liberal application of hugs",
+                "a gaggle of hugs",
+                "a battery of hugs",
+                "a herd of hugs",
+                "a band of hugs",
+                "exactly one, worthy hug",
+                "maybe two hugs",
+                "a hug or two",
+                "the hug OF DOOM",
+                "a nice hug"
+            ],
+            [
+                ", because it's deserved._",
+                ", as long as it holds._",
+                ", because hugs._",
+                ", because it's important._",
+                ", to help them feel better._",
+                ", for as long as they need._",
+                "._",
+                "._",
+                "._",
+                "._"
+            ]
+        ]
+    ]
+}

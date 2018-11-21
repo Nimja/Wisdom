@@ -61,7 +61,13 @@ Command.prototype = {
         if (this.hasCommand(cmd.command)) {
             this.functions[cmd.command](cmd, env);
         } else if (this.speak.hasDict(cmd.command)) {
-            var message = this.speak.getSentence(cmd.command, env.user.username);
+            var username = env.user.username;
+            // If a name is mentioned, use that one instead of the author.
+            var first = env.mentions.users.first();
+            if (first) {
+                username = first.username
+            }
+            var message = this.speak.getSentence(cmd.command, username);
             env.channel.send(message);
         }
     },

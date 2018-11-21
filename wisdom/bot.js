@@ -1,4 +1,3 @@
-// Load the speak packages.
 var Speak = require('./speak.js');
 var Command = require('./command.js');
 var SpamFilter = require('./spamfilter.js');
@@ -79,6 +78,7 @@ Bot.prototype = {
             isAdmin: isAdmin,
             defaultChannel: this.channel,
             client: this.client,
+            mentions: msg.mentions,
             user: user,
             channel: channel
         };
