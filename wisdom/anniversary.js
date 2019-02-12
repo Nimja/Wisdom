@@ -53,7 +53,7 @@ Anniversary.prototype = {
             channel.send(message);
         } catch (error) {
             // Do nothing in case it's not found/invalid.
-            console.log(error);
+            console.log("Anniversary error:", error);
         }
     },
     /**

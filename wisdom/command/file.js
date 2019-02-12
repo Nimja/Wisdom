@@ -4,13 +4,13 @@ var cache = {};
 var hour = 3600000;
 
 module.exports = function (cmd, env) {
-    if (!env.isDm) {
+    if (!env.isDm && !env.isAdmin) {
         return;
     }
     if (refreshCache()) {
-        updateCache(env);
+        updateCache(cmd, env);
     } else {
-        makeResponse(env);
+        makeResponse(cmd, env);
     }
 };
 
@@ -20,13 +20,34 @@ function refreshCache()
     return !cache.time || cache.time.getTime() < now.getTime() - hour || cache.time.getHours() < now.getHours();
 }
 
-
-function makeResponse(env)
+function makeResponse(cmd, env)
 {
+    var rest = cmd.rest.toLowerCase();
     var filter = cache.content.filter;
-    var latest = cache.content.files[Math.floor(Math.random() * cache.content.files.length)];
-    message = formatFile(filter, latest);
-    env.user.send(message.text, message);
+    var file = false;
+    if (rest === 'last') {
+        file = cache.content.files[0]
+    } else if (rest.length > 0) {
+        file = searchFile(rest)
+    } else {
+        file = cache.content.files[Math.floor(Math.random() * cache.content.files.length)];
+    }
+    if (file) {
+        message = formatFile(filter, file);
+        env.channel.send(message.text, message);
+    }
+}
+
+function searchFile(rest)
+{
+    var result = [];
+    for (var i in cache.content.files) {
+        var file = cache.content.files[i];
+        if (file.search.search(rest) > -1) {
+            return file;
+        }
+    }
+    return false;
 }
 
 function formatFile(filter, file)
@@ -37,6 +58,7 @@ function formatFile(filter, file)
             "color": 4215449,
             "fields": [
                 {name: 'Description', value: file.description},
+                {name: 'Intended effect', value: file.intended},
                 {name: 'Length', value: secondsToTime(file.length)}
             ]
         }
@@ -90,7 +112,7 @@ function applyOtherTags(tags, filetags, message)
     }
 }
 
-function updateCache(env) {
+function updateCache(cmd, env) {
     request('https://hypno.nimja.com/app', function (error, response, body) {
         if (error) {
             console.log(error);
@@ -98,8 +120,17 @@ function updateCache(env) {
         var data = JSON.parse(body);
         if (data) {
             cache = data;
+            createTextSearch();
             cache.time = new Date(cache.time * 1000);
         }
-        makeResponse(env);
+        makeResponse(cmd, env);
     });
+}
+
+function createTextSearch() {
+    for (var i in cache.content.files) {
+        var file = cache.content.files[i];
+        var search = file.name; // + ' ' + file.description + ' ' + file.intended;
+        file.search = search.toLowerCase();
+    }
 }
