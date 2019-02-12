@@ -1,3 +1,5 @@
+var Discord = require('discord.js');
+
 var Command = function (prefix, speak) {
     this.functions = {};
     this.prefix = prefix;
@@ -49,7 +51,7 @@ Command.prototype = {
         if (!this.hasCommand(cmd) && !this.speak.hasDict(cmd)) {
             return false;
         }
-        return {command: cmd, rest: rest.toString().trim()};
+        return { command: cmd, rest: rest.toString().trim() };
     },
     /**
      * Execute a single command.
@@ -61,11 +63,11 @@ Command.prototype = {
         if (this.hasCommand(cmd.command)) {
             this.functions[cmd.command](cmd, env);
         } else if (this.speak.hasDict(cmd.command)) {
-            var username = env.user.username;
+            var username = Discord.escapeMarkdown(env.user.username);
             // If a name is mentioned, use that one instead of the author.
             var first = env.mentions.users.first();
-            if (first) {
-                username = first.username
+            if (first && !first.bot) {
+                username = Discord.escapeMarkdown(first.username);
             }
             var message = this.speak.getSentence(cmd.command, username);
             env.channel.send(message);

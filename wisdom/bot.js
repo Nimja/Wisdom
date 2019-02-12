@@ -25,7 +25,7 @@ Bot.prototype = {
     /**
      * Init methods and set up scheduler.
      */
-    init: function() {
+    init: function () {
         this.client.user.setStatus(this.status);
         this.channel = this.client.channels.get(this.defaultChannelId);
         if (this.channel) {
@@ -38,7 +38,7 @@ Bot.prototype = {
     /**
      * Daily jobs, this allows for actions not tied to a message.
      */
-    daily: function() {
+    daily: function () {
         this.anniversary.callout();
     },
     /**
@@ -62,7 +62,7 @@ Bot.prototype = {
         var cmd = this.command.getCommand(msg.content.trim());
         if (!cmd) {
             if (msg.isMentioned(this.client.user) && this.command.speak.hasDict('mentioned')) {
-                cmd= {command: 'mentioned', rest: ''};
+                cmd = { command: 'mentioned', rest: '' };
             } else {
                 return;
             }
@@ -104,14 +104,14 @@ Bot.prototype = {
             user: user,
             channel: user
         };
-        this.command.execute({command: 'intro', rest: ''}, env);
+        this.command.execute({ command: 'intro', rest: '' }, env);
     },
     /**
      * Return true if user is admin.
      * @param {String} userId
      * @returns {Boolean}
      */
-    isAdmin: function(userId) {
+    isAdmin: function (userId) {
         return this.admins.indexOf(userId) > -1;
     }
 };
