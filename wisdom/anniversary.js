@@ -48,7 +48,7 @@ Anniversary.prototype = {
         try {
             member = await guild.fetchMember(anniversary.id, false);
             var user = member.user;
-            var year = anniversary.age > 1 ? ' years' : ' year';
+            var year = anniversary.age > 1 ? 'years' : 'year';
             var message = this.getMessage(user.toString(), anniversary.age, year);
             channel.send(message);
         } catch (error) {
