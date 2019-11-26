@@ -1,5 +1,5 @@
 {
-    "text": "Welcome to Nimja Hypnosis!",
+    "text": "Hi, I am Wisdom! Welcome to Nimja Hypnosis!",
     "embed": {
         "color": 4215449,
         "fields": [
@@ -10,6 +10,10 @@
             {
                 "name": "General",
                 "value": "When you're ready, say \"Hi!\" to everyone in the #general channel."
+            },
+            {
+                "name": "About Wisdom",
+                "value": "I don't really exist so I don't have a gender. I do prefer her/she more than it.\nI am happy to serve with a few cute functionalities."
             },
             {
                 "name": "Bot commands",

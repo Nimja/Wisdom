@@ -10,7 +10,7 @@ var Bot = function (client, config) {
     this.client = client;
     this.status = config.bot_status;
     this.admins = config.admins;
-    this.defaultChannelId = config.default_channel_id;
+    this.defaultChannel = config.default_channel;
     this.channel;
     this.speak = new Speak();
     this.command = new Command(config.prefix, this.speak);
@@ -27,7 +27,7 @@ Bot.prototype = {
      */
     init: function () {
         this.client.user.setStatus(this.status);
-        this.channel = this.client.channels.get(this.defaultChannelId);
+        this.channel = this.client.channels.find('name', this.defaultChannel);
         if (this.channel) {
             this.anniversary.init(this.channel);
             schedule.scheduleJob('0 11 * * *', this.daily.bind(this));

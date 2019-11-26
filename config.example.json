@@ -5,7 +5,7 @@
     "timeout": 30,
     "welcome_joiners": true,
     "admins": ["PUT_ADMIN_USER_ID_HERE"],
-    "default_channel_id": "PUT_ANNIVERSARY_CHANNEL_ID_HERE",
+    "default_channel": "general",
     "idle_channels": ["general"],
     "idle_timeout": 3600
 }
