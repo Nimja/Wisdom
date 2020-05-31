@@ -13,7 +13,7 @@ var Bot = function (client, config) {
     this.defaultChannel = config.default_channel;
     this.channel;
     this.speak = new Speak();
-    this.command = new Command(config.prefix, this.speak);
+    this.command = new Command(config, this.speak);
     this.anniversary = new Anniversary(client);
     this.idle = new Idle(this.speak, config.idle_channels, config.idle_timeout);
     this.spamFilter = new SpamFilter(config.timeout);
