@@ -7,7 +7,6 @@ var schedule = require('node-schedule');
 
 class Bot {
     constructor(client, config) {
-        this.commands = ['who', 'echo'];
         this.client = client;
         this.status = config.bot_status;
         this.admins = config.admins;
