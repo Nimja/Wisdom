@@ -12,10 +12,12 @@ A discord bot that has a few simple commands.
 * [Setup Discord bot](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token)
 
 ## Configuration
-Config should be put in config.json - An example is included in config.example.json
+Config should be put in `config.json` - An example is included in `config.example.json`
 
-* `token` - The token from setting up the discord bot.
-* `prefix` - The prefix character for the bot commands - default: !
+* `token` - string - The token from setting up the discord bot.
+* `admins` - string[] - User IDS of admins.
+* `report_user` - string - User ID of (probably admin) user that bot reports to, for suggestions.
+* `prefix` - string - The prefix character for the bot commands - default: !
 * `bot_status` - What status the bot should be. Values: `online`, `idle`, `invisible`, `dnd`
 * `timeout` - int seconds - Timeout to prevent spamming/flooding.
 * `welcome_joiners` - boolean - Should we send a private message to new joiners?
@@ -27,6 +29,7 @@ Config should be put in config.json - An example is included in config.example.j
 
 * Check out repository.
 * Run: `npm install .` - To install dependencies.
+* Run: `cp config.example.json config.json` - Copies example config to config, needs to be edited!
 * Run: `node wisdom`
 
 ## Bot commands
@@ -38,6 +41,7 @@ Adding a new file there automatically adds it to the bot.
 * `!echo [channel] [message]` - Repeat the message on the specified channel. Only works for admins (see config).
 * `!choose this or that` - Randomly selects one, can be "or" or comma.
 * `!intro` - Repeat the intro text, goes to private message.
+* `!suggest [message]` - Suggest something.
 
 ## Speak commands
 Each of the speak commands is kept in the related JSON file in `wisdom/dicts/*.json`
@@ -45,4 +49,3 @@ Each of the speak commands is kept in the related JSON file in `wisdom/dicts/*.j
 Adding a new file there automatically adds it to the bot.
 
 * `!dream|advice|compliment|decide|question` - Simple commands that return a relevant reply.
-

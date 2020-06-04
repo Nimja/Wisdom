@@ -1,10 +1,11 @@
 {
     "token": "PUT_YOUR_TOKEN_FROM_DISCORD_HERE",
+    "admins": ["PUT_ADMIN_USER_ID_HERE"],
+    "suggestion_user": "PUT_ADMIN_USER_ID_HERE",
     "prefix": "!",
     "bot_status": "invisible",
     "timeout": 30,
     "welcome_joiners": true,
-    "admins": ["PUT_ADMIN_USER_ID_HERE"],
     "default_channel": "general",
     "idle_channels": ["general"],
     "idle_timeout": 3600

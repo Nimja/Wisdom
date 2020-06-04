@@ -5,48 +5,49 @@ var Idle = require('./idle.js');
 var Anniversary = require('./anniversary.js');
 var schedule = require('node-schedule');
 
-var Bot = function (client, config) {
-    this.commands = ['who', 'echo'];
-    this.client = client;
-    this.status = config.bot_status;
-    this.admins = config.admins;
-    this.defaultChannel = config.default_channel;
-    this.channel;
-    this.speak = new Speak();
-    this.command = new Command(config, this.speak);
-    this.anniversary = new Anniversary(client);
-    this.idle = new Idle(this.speak, config.idle_channels, config.idle_timeout);
-    this.spamFilter = new SpamFilter(config.timeout);
-};
+class Bot {
+    constructor(client, config) {
+        this.commands = ['who', 'echo'];
+        this.client = client;
+        this.status = config.bot_status;
+        this.admins = config.admins;
+        this.reportUserId = config.report_user;
+        this.reportUser;
+        this.defaultChannel = config.default_channel;
+        this.channel;
+        this.speak = new Speak();
+        this.command = new Command(config, this.speak);
+        this.anniversary = new Anniversary(client);
+        this.idle = new Idle(this.speak, config.idle_channels, config.idle_timeout);
+        this.spamFilter = new SpamFilter(config.timeout);
+    }
 
-module.exports = Bot;
-
-Bot.prototype = {
     /**
      * Init methods and set up scheduler.
      */
-    init: function () {
+    init() {
         this.client.user.setStatus(this.status);
         this.channel = this.client.channels.find('name', this.defaultChannel);
         if (this.channel) {
             this.anniversary.init(this.channel);
             schedule.scheduleJob('0 11 * * *', this.daily.bind(this));
+            this.reportUser = this.channel.guild.member(this.reportUserId).user
         } else {
             console.error("ERROR: Unable to load default channel, echo and anniversary will not work!");
         }
-    },
+    }
     /**
      * Daily jobs, this allows for actions not tied to a message.
      */
-    daily: function () {
+    daily() {
         this.anniversary.callout();
-    },
+    }
     /**
      * Handle a message from Discord.
      *
      * @param {Message} msg
      */
-    handleMessage: function (msg) {
+    handleMessage(msg) {
         var user = msg.author;
         // Don't react to bots.
         if (user.bot) {
@@ -77,19 +78,20 @@ Bot.prototype = {
             isDm: isDm,
             isAdmin: isAdmin,
             defaultChannel: this.channel,
+            reportUser: this.reportUser,
             client: this.client,
             mentions: msg.mentions,
             user: user,
             channel: channel
         };
         this.command.execute(cmd, env);
-    },
+    }
     /**
      * Handle a message from Discord.
      *
      * @param {Message} msg
      */
-    handleJoin: function (user) {
+    handleJoin(user) {
         // Don't react to bots.
         if (user.bot) {
             return;
@@ -105,13 +107,15 @@ Bot.prototype = {
             channel: user
         };
         this.command.execute({ command: 'intro', rest: '' }, env);
-    },
+    }
     /**
      * Return true if user is admin.
      * @param {String} userId
      * @returns {Boolean}
      */
-    isAdmin: function (userId) {
+    isAdmin(userId) {
         return this.admins.indexOf(userId) > -1;
     }
 };
+
+module.exports = Bot;

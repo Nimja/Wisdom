@@ -42,15 +42,17 @@ Anniversary.prototype = {
      * @param {type} channel
      * @param {Object} anniversary
      */
-    celebrateAnniversary: async function (channel, anniversary) {
+    celebrateAnniversary: function (channel, anniversary) {
         var guild = channel.guild;
         // We fetch users via the channel.guild so that we don't announce people who are no longer in the guild.
         try {
-            member = await guild.fetchMember(anniversary.id, false);
-            var user = member.user;
-            var year = anniversary.age > 1 ? 'years' : 'year';
-            var message = this.getMessage(user.toString(), anniversary.age, year);
-            channel.send(message);
+            let member = guild.member(anniversary.id);
+            if (member) {
+                var user = member.user;
+                var year = anniversary.age > 1 ? 'years' : 'year';
+                var message = this.getMessage(user.toString(), anniversary.age, year);
+                channel.send(message);
+            }
         } catch (error) {
             // Do nothing in case it's not found/invalid.
             console.log("Anniversary error:", error);
