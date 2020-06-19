@@ -4,6 +4,7 @@ var SpamFilter = require('./spamfilter.js');
 var Idle = require('./idle.js');
 var Anniversary = require('./anniversary.js');
 var schedule = require('node-schedule');
+var Discord = require('discord.js');
 
 class Bot {
     constructor(client, config) {
@@ -73,16 +74,17 @@ class Bot {
             return;
         }
         // Setup environment for command, and execute.
-        var env = {
+        var env = new Env({
             isDm: isDm,
             isAdmin: isAdmin,
             defaultChannel: this.channel,
             reportUser: this.reportUser,
             client: this.client,
             mentions: msg.mentions,
+            guild: msg.guild,
             user: user,
             channel: channel
-        };
+        });
         this.command.execute(cmd, env);
     }
     /**
@@ -116,5 +118,32 @@ class Bot {
         return this.admins.indexOf(userId) > -1;
     }
 };
+
+/**
+ * Holder for convenience methods.
+ */
+class Env {
+    constructor(obj) {
+        for (let i in obj) {
+            this[i] = obj[i];
+        }
+    }
+    getUserName(includeMentions) {
+        let user = this.user;
+        let first = this.mentions.users.first();
+        if (includeMentions && first) {
+            user = first;
+        }
+        let username = user.username;
+        if (this.guild) {
+            username = this.guild.member(user).displayName;
+        }
+        return this.escape(username);
+    }
+    escape(str) {
+        return Discord.escapeMarkdown(str);
+    }
+}
+
 
 module.exports = Bot;

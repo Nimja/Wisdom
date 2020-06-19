@@ -30,7 +30,6 @@ module.exports = function (cmd, env) {
     if (options.length < 2) {
         return;
     }
-    var name = env.user.username;
     var answer = options[Math.floor(Math.random() * options.length)].toString().trim();
-    env.channel.send("_" + name + "_ - I choose: " + answer);
+    env.channel.send("_" + env.getUserName(true) + "_ - I choose: " + answer);
 };

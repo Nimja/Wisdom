@@ -1,5 +1,3 @@
-var Discord = require('discord.js');
-
 var Command = function (config, speak) {
     this.functions = {};
     this.prefix = config.prefix;
@@ -63,19 +61,13 @@ Command.prototype = {
         if (this.hasCommand(cmd.command)) {
             this.functions[cmd.command](cmd, env);
         } else if (this.speak.hasDict(cmd.command)) {
-            // Support for NSFW alternative dictionaries.
+            // Support for alternative dictionaries based on channel names.
             let dict = cmd.command;
             let variation = dict + "_" + env.channel.name;
             if (this.speak.hasDict(variation)) {
                 dict = variation;
             }
-            var username = Discord.escapeMarkdown(env.user.username);
-            // If a name is mentioned, use that one instead of the author.
-            var first = env.mentions.users.first();
-            if (first && !first.bot) {
-                username = Discord.escapeMarkdown(first.username);
-            }
-            var message = this.speak.getSentence(dict, username);
+            var message = this.speak.getSentence(dict, env.getUserName(true));
             env.channel.send(message);
         }
     },
