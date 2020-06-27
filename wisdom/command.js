@@ -1,3 +1,5 @@
+var aliases = require('./data/aliases.json');
+
 var Command = function (config, speak) {
     this.functions = {};
     this.prefix = config.prefix;
@@ -45,6 +47,9 @@ Command.prototype = {
             return false;
         }
         var cmd = matches[1].toString().toLowerCase();
+        if (aliases.hasOwnProperty(cmd)) {
+            cmd = aliases[cmd];
+        }
         var rest = matches[2];
         if (!this.hasCommand(cmd) && !this.speak.hasDict(cmd)) {
             return false;
