@@ -14,15 +14,23 @@
         "_buries NAME under ABUNNY._"
     ],
     "adverbly": [
+        "amusingly",
         "clumsily",
         "curiously",
         "expertly",
+        "fantastically",
+        "hurriedly",
+        "immediately, without hesitation, ",
         "impressively",
+        "jokingly",
+        "joyfully",
+        "nicely",
         "playfully",
         "quickly",
+        "sharply",
+        "smoothly",
         "swiftly",
-        "immediately, without hesitation, ",
-        "sharply"
+        "wonderfully"
     ],
     "throwsbunnyat": [
         "bucks ABUNNY at",
@@ -36,7 +44,7 @@
         "fires ABUNNY at",
         "flicks ABUNNY at",
         "flings ABUNNY at",
-        "flips ABUNNY to",
+        "flips ABUNNY at",
         "heaves ABUNNY at",
         "hurls ABUNNY at",
         "lapidates ABUNNY at",
@@ -95,6 +103,7 @@
         "on the nose",
         "on the shoulder",
         "on the snoot",
+        "on the boot",
         "perfectly, dead-center between the eyes"
     ],
     "abunny": [
@@ -131,7 +140,7 @@
         "an army of cuddly bunnies",
         "an enormous plush bunny",
         "several giggling bunnies",
-        "the bunny of caerbannog",
+        "the Rabbit of Caerbannog",
         "the bunny of DOOM",
         "the bunny of plushness",
         "the bunny of vengeance",
