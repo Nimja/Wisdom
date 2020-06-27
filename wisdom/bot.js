@@ -131,7 +131,7 @@ class Env {
     getUserName(includeMentions) {
         let user = this.user;
         let first = this.mentions.users.first();
-        if (includeMentions && first) {
+        if (includeMentions && first && !first.bot) {
             user = first;
         }
         let username = user.username;
