@@ -8,7 +8,7 @@ const responses = [
     'Thank you.',
     'I\'ve noted it down.',
     'Alright, I will pass it on.',
-    'Go it.',
+    'Got it.',
     'Alright.',
     'Yes.',
     'Interesting...'

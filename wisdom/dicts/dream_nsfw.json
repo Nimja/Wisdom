@@ -84,10 +84,12 @@
         "by",
         "next to",
         "on top of",
+        "together with",
         "with",
         "with",
         "with",
         "with",
+        "for",
         "while thinking of"
     ],
     "person": [
@@ -111,7 +113,7 @@
         "your teacher"
     ],
     "location": [
-        "at a carnaval",
+        "at a carnival",
         "deep under the ocean",
         "deep underground",
         "high in the sky",
@@ -192,10 +194,11 @@
                 "castle",
                 "cave",
                 "cavern",
-                "mysterious hole",
                 "house",
                 "mansion",
                 "mountain",
+                "mysterious hole",
+                "pirate ship",
                 "restaurant",
                 "ruin",
                 "skyscraper",
