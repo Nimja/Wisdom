@@ -13,7 +13,7 @@ class Bot {
         this.admins = config.admins;
         this.reportUserId = config.report_user;
         this.reportUser;
-        this.defaultChannel = config.default_channel;
+        this.defaultChannelId = config.default_channel;
         this.channel;
         this.speak = new Speak();
         this.command = new Command(config, this.speak);
@@ -27,14 +27,20 @@ class Bot {
      */
     init() {
         this.client.user.setStatus(this.status);
-        this.channel = this.client.channels.find('name', this.defaultChannel);
-        if (this.channel) {
-            this.anniversary.init(this.channel);
-            schedule.scheduleJob('0 11 * * *', this.daily.bind(this));
-            this.reportUser = this.channel.guild.member(this.reportUserId).user
-        } else {
-            console.error("ERROR: Unable to load default channel, echo and anniversary will not work!");
-        }
+        // Set reporting user
+        // var this = this;
+        this.client.users.fetch(this.reportUserId).then(
+            user => {
+                this.reportUser = user;
+            }
+        )
+        this.client.channels.fetch(this.defaultChannelId).then(
+            channel => {
+                this.channel = channel;
+                this.anniversary.init(this.channel);
+                schedule.scheduleJob('0 11 * * *', this.daily.bind(this));
+            }
+        );
     }
     /**
      * Daily jobs, this allows for actions not tied to a message.
@@ -62,7 +68,7 @@ class Bot {
 
         var cmd = this.command.getCommand(msg.content.trim());
         if (!cmd) {
-            if (msg.isMentioned(this.client.user) && this.command.speak.hasDict('mentioned')) {
+            if (msg.mentions.users.get(this.client.user.id) && this.command.speak.hasDict('mentioned')) {
                 cmd = { command: 'mentioned', rest: '' };
             } else {
                 return;

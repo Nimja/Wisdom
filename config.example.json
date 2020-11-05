@@ -6,7 +6,7 @@
     "bot_status": "invisible",
     "timeout": 30,
     "welcome_joiners": true,
-    "default_channel": "general",
-    "idle_channels": ["general"],
+    "default_channel": "PUT_CHANNEL_ID_HERE",
+    "idle_channels": ["PUT_CHANNEL_ID_HERE"],
     "idle_timeout": 3600
 }

@@ -24,6 +24,10 @@ module.exports = function (cmd, env) {
     if (rest.length < 1) {
         return; // Nothing else was said.
     }
+    if (!env.reportUser) {
+        env.channel.send("I am sorry, suggesting is temporarily out of order, I currently don't know who to report to.");
+        return;
+    }
     env.reportUser.send("Suggestion: " + quote(rest));
     let message = responses[Math.floor(Math.random() * responses.length)];
     console.log(message);
