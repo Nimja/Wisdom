@@ -30,6 +30,7 @@
         "Do you ever talk to yourself? If so, what do you say?",
         "Do you experience phantom vibration? (Feeling your phone vibrate even though it didn't.)",
         "Do you feel like fall and spring are getting shorter?",
+        "Do you have an open mind?",
         "Do you have any hidden talents? What are they?",
         "Do you have any pets? What are their names?",
         "Do you like things to be carefully planned or do you prefer to just go with the flow?",
@@ -175,7 +176,7 @@
         "If your childhood had a smell, what would it be?",
         "If your job gave you a surprise three day paid break to rest and recuperate, what would you do with those three days?",
         "If your life was a book, what would its title be?",
-        "If your life was a meal, what would kind of meal would it be?",
+        "If your life was a meal, what kind of meal would it be?",
         "If your mind was an island, what would it look like?",
         "In the past people were buried with the items they would need in the afterlife, what would you want buried with you so you could use it in the afterlife?",
         "In what situation or place would you feel the most out of place in?",
@@ -358,7 +359,7 @@
         "What fictional characters have you had a crush on over the years?",
         "What fictional place would you most like to go?",
         "What flavor of ice cream do you wish existed?",
-        "What food do you crave most often?",
+        "What food always makes you sallivate?",
         "What food do you know you shouldn't eat but can't help yourself?",
         "What food have you never eaten but would really like to try?",
         "What food is delicious but a pain to eat?",
@@ -491,6 +492,7 @@
         "What is the funniest TV series you have seen?",
         "What is the funniest TV show you've ever seen?",
         "What is the funniest word in the English language?",
+        "What is the greatest song in the world? (no, not the tribute)",
         "What is the grossest food that you just can't get enough of?",
         "What is the hardest lesson you've learned?",
         "What is the hardest sport to excel at?",
@@ -619,6 +621,7 @@
         "What is your favorite guilty pleasure song?",
         "What is your favorite holiday movie?",
         "What is your favorite holiday?",
+        "What is your favorite kind of Christmas cookie?",
         "What is your favorite movie soundtrack?",
         "What is your favorite number? Why?",
         "What is your favorite pastime?",
@@ -926,6 +929,7 @@
         "Would you rather go hang gliding or whitewater rafting?",
         "Would you want the ability to hear the thoughts of people near you if you couldn't turn the ability off?",
         "You find a remote that can rewind, fast forward, stop and start time. What do you do with it?",
-        "You have to relive one day of your life forever. Which day do you choose?"
+        "You have to relive one day of your life forever. Which day do you choose?",
+        "You're having a snack-attack! What's the first thing you grab?"
     ]
 }
