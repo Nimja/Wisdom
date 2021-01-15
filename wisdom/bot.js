@@ -1,4 +1,4 @@
-var Speak = require('./speak.js');
+var Speak = require('./speak/speak.js');
 var Command = require('./command.js');
 var SpamFilter = require('./spamfilter.js');
 var Idle = require('./idle.js');

@@ -49,7 +49,9 @@
             <?php
             $buttons = [];
             $script = [
-                file_get_contents('wisdom/speak.js'),
+                file_get_contents('wisdom/speak/array.js'),
+                file_get_contents('wisdom/speak/dict.js'),
+                file_get_contents('wisdom/speak/speak.js'),
                 'var speak = new Speak();'
             ];
             $dir = 'wisdom/dicts/';
@@ -60,7 +62,7 @@
                 $name = pathinfo($file, PATHINFO_FILENAME);
                 $ucName = ucfirst($name);
                 $buttons[] = "<button data-dict=\"{$name}\" class=\"button\">{$ucName}</button>";
-                $script[] = "speak.dicts.{$name} = " . file_get_contents($dir . $file) . ";";
+                $script[] = "speak.dicts.{$name} = new SpeakDict(" . file_get_contents($dir . $file) . ");";
             }
             echo implode(PHP_EOL, $buttons);
             ?>
