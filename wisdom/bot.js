@@ -69,7 +69,9 @@ class Bot {
         var cmd = this.command.getCommand(msg.content.trim());
         if (!cmd) {
             if (msg.mentions.users.get(this.client.user.id) && this.command.speak.hasDict('mentioned')) {
+                // Until discord.js supports replies in version 13, I have disabled this.
                 cmd = { command: 'mentioned', rest: '' };
+                return;
             } else {
                 return;
             }
