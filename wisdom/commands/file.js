@@ -1,28 +1,35 @@
-var request = require('request');
+
+
+module.exports = {
+    'file': {
+        config: {
+            description: 'Get information for a file',
+            options: [{
+                name: 'file',
+                type: 'STRING',
+                description: 'File',
+                required: true,
+            }]
+        },
+        handler: handle
+    },
+}
+
+const request = require('request');
+const schedule = require('node-schedule');
+
+schedule.scheduleJob('2 20 * * *', updateCache);
+
 
 var cache = {};
 var hour = 3600000;
 
-module.exports = function (cmd, env) {
-    if (!env.isDm && !env.isAdmin) {
-        return;
-    }
-    if (refreshCache()) {
-        updateCache(cmd, env);
-    } else {
-        makeResponse(cmd, env);
-    }
-};
+updateCache();
 
-function refreshCache()
-{
-    var now = new Date();
-    return !cache.time || cache.time.getTime() < now.getTime() - hour || cache.time.getHours() < now.getHours();
-}
+function handle(interaction) {
+    var rest = interaction.options.get('file');
+    rest = rest ? rest.value.toLowerCase().trim() : '';
 
-function makeResponse(cmd, env)
-{
-    var rest = cmd.rest.toLowerCase();
     var filter = cache.content.filter;
     var file = false;
     if (rest === 'last') {
@@ -34,12 +41,16 @@ function makeResponse(cmd, env)
     }
     if (file) {
         message = formatFile(filter, file);
-        env.channel.send(message.text, message);
+        return message
+    } else {
+        return {
+            "content": "I couldn't find anything for: " + rest,
+            "ephemeral": true,
+        };
     }
 }
 
-function searchFile(rest)
-{
+function searchFile(rest) {
     var result = [];
     for (var i in cache.content.files) {
         var file = cache.content.files[i];
@@ -50,34 +61,34 @@ function searchFile(rest)
     return false;
 }
 
-function formatFile(filter, file)
-{
-    var message = {
-        "text": file.name + ' - ' + file.links.details,
-        "embed": {
-            "color": 4215449,
-            "fields": [
-                {name: 'Description', value: file.description},
-                {name: 'Intended effect', value: file.intended},
-                {name: 'Length', value: secondsToTime(file.length)}
-            ]
-        }
+function formatFile(filter, file) {
+    let message = {
+        content: file.name + ' - ' + file.links.details,
+        ephemeral: true,
     };
-    applyFilterTags(filter.category, ['Category', 'Categories'], file.tags, message);
-    applyFilterTags(filter.feature, ['Feature', 'Features'], file.tags, message);
-    applyOtherTags(filter.tags, file.tags, message);
+    let embed = {
+        "color": 4215449,
+        "fields": [
+            { name: 'Description', value: file.description },
+            { name: 'Intended effect', value: file.intended },
+            { name: 'Length', value: secondsToTime(file.length) }
+        ]
+    }
+
+    applyFilterTags(filter.category, ['Category', 'Categories'], file.tags, embed);
+    applyFilterTags(filter.feature, ['Feature', 'Features'], file.tags, embed);
+    applyOtherTags(filter.tags, file.tags, embed);
+    message.embeds = [embed];
     return message;
 }
 
-function secondsToTime(seconds)
-{
+function secondsToTime(seconds) {
     var date = new Date(seconds * 1000);
     var result = date.toISOString().substr(11, 8);
     return result.replace(/^00\:/, '');
 }
 
-function applyFilterTags(filters, names, filetags, message)
-{
+function applyFilterTags(filters, names, filetags, embed) {
     var result = [];
     for (var tag in filters) {
         if (filetags.indexOf(tag) > -1) {
@@ -88,11 +99,10 @@ function applyFilterTags(filters, names, filetags, message)
         return;
     }
     var name = result.length == 1 ? names[0] : names[1];
-    message.embed.fields.push({name: name, value: result.join(', ')});
+    embed.fields.push({ name: name, value: result.join(', ') });
 }
 
-function applyOtherTags(tags, filetags, message)
-{
+function applyOtherTags(tags, filetags, embed) {
     for (var name in tags) {
         if (name == 'Length' || name == 'Platform') {
             continue;
@@ -107,12 +117,12 @@ function applyOtherTags(tags, filetags, message)
             }
         }
         if (cur !== null) {
-            message.embed.fields.push({name: name, value: cur});
+            embed.fields.push({ name: name, value: cur });
         }
     }
 }
 
-function updateCache(cmd, env) {
+function updateCache() {
     request('https://hypno.nimja.com/app', function (error, response, body) {
         if (error) {
             console.log(error);
@@ -123,7 +133,6 @@ function updateCache(cmd, env) {
             createTextSearch();
             cache.time = new Date(cache.time * 1000);
         }
-        makeResponse(cmd, env);
     });
 }
 

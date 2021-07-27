@@ -1,36 +1,40 @@
-var isNode = typeof (window) === "undefined" && typeof (navigator) === "undefined";
-
-var SpeakArray = function (item) {
-    this.index = 0;
-    this.item = item;
-    this.shuffleArray();
-};
-
-/**
- * SpeakArray will shuffle an array and go over it one by one.
- *
- * Once you reach the end, it will shuffle again and start over.
- *
- * This ensures we have a fair bit of randomness, though a small chance of repeats
- * if the item was in the last position and then first position after the next shuffle.
- */
-SpeakArray.prototype = {
+class SpeakArray {
+    constructor(item) {
+        this.index = 0;
+        this.item = item;
+        this.shuffleArray();
+    }
+    /**
+     * SpeakArray will shuffle an array and go over it one by one.
+     *
+     * Once you reach the end, it will shuffle again and start over.
+     *
+     * This ensures we have a fair bit of randomness, though a small chance of repeats
+     * if the item was in the last position and then first position after the next shuffle.
+     */
     /**
      * Get next item in array, after shuffle.
      */
-    getNext: function () {
+    getNext() {
         let result = this.item[this.index];
         this.index++;
         if (this.index >= this.item.length) {
             this.shuffleArray();
         }
         return result;
-    },
-
+    }
+    /**
+     * SpeakArray will shuffle an array and go over it one by one.
+     *
+     * Once you reach the end, it will shuffle again and start over.
+     *
+     * This ensures we have a fair bit of randomness, though a small chance of repeats
+     * if the item was in the last position and then first position after the next shuffle.
+     */
     /**
      * Shuffle array and reset index.
      */
-    shuffleArray: function () {
+    shuffleArray() {
         let array = this.item;
         var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -48,10 +52,6 @@ SpeakArray.prototype = {
         }
         this.index = 0;
     }
-
 }
 
-// Export if in nodejs.
-if (isNode) {
-    module.exports = SpeakArray;
-}
+module.exports = SpeakArray; // NODEONLY

@@ -1,14 +1,14 @@
 // Load configuration.
-var config = require('./config.json');
+const config = require('./config.json');
 
 // Load libraries.
-var Bot = require('./wisdom/bot.js');
-var Discord = require('discord.js');
+const Bot = require('./wisdom/bot.js');
+const { Client, Intents } = require('discord.js');
 
 // Initialize Discord Bot
 console.log('Initializing...');
-var client = new Discord.Client();
-var bot = new Bot(client, config);
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES] });
+const bot = new Bot(client, config);
 
 // Report errors, if/when they occur.
 client.on('error', error => {
@@ -17,20 +17,15 @@ client.on('error', error => {
 
 // Reporting we have connected.
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+    console.log(`Logged in as: ${client.user.tag}`);
     bot.init();
 });
 
-// Handle a message.
-client.on('message', msg => {
-    bot.handleMessage(msg);
+// React to commands.
+client.on('interactionCreate', interaction => {
+    if (!interaction.isCommand()) return;
+    bot.handleCommand(interaction);
 });
-
-if (config.welcome_joiners) {
-    client.on('guildMemberAdd', user => {
-        bot.handleJoin(user);
-    });
-}
 
 // Do actual login.
 client.login(config.token);

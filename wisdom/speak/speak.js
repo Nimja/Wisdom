@@ -1,67 +1,57 @@
 var isNode = typeof (window) === "undefined" && typeof (navigator) === "undefined";
 
-var Speak = function () {
-    this.dicts = {};
-    this.commands = [];
-    this.init();
-};
+var SpeakDict = require('./dict.js'); // NODEONLY
 
-// Export if in nodejs.
-if (isNode) {
-    module.exports = Speak;
-    var SpeakDict = require('./dict.js');
-}
-
-Speak.prototype = {
+class Speak {
+    constructor() {
+        this.dicts = {};
+        this.commands = [];
+        this.init();
+    }
     /**
      * Dynamically load json files from dicts, but only if we're on nodeJs.
      */
-    init: function () {
+    init() {
         if (isNode) {
-            const fs = require('fs');
             var dicts = this.dicts;
             var commands = this.commands;
-            // Go over contents in dicts dir.
-            fs.readdirSync('wisdom/dicts').forEach(file => {
-                var dot = file.lastIndexOf('.');
-                var extension = file.substr(dot + 1);
-                var baseName = file.substr(0, dot);
-                // Check extension :)
-                if (extension !== 'json') {
-                    console.error('ERROR: ' + file + ' not JSON file!');
-                    return;
-                }
+            const fs = require('fs');
+            const commandFiles = fs.readdirSync('./wisdom/dicts').filter(file => file.endsWith('.json'));
+            for (const file of commandFiles) {
+                var baseName = file.substr(0, file.lastIndexOf('.'));
                 // Include file.
                 var dict = require('../dicts/' + file);
-                var speakDict = new SpeakDict(dict)
+                var speakDict = new SpeakDict(dict);
                 if (speakDict.isValid) {
                     dicts[baseName] = speakDict;
                     commands.push(baseName);
                 } else {
                     console.error('ERROR: ' + file + ' is missing "sentences" property.');
                 }
-            });
+            }
         }
-    },
+    }
     /**
      * Return true if we have this command/dictionary.
      *
      * @param {String} dict
      * @returns {Boolean}
      */
-    hasDict: function (dict) {
+    hasDict(dict) {
         return this.dicts.hasOwnProperty(dict);
-    },
+    }
     /**
      * Construct the sentence.
      * @param {String} dict
      * @param {String} username
      * @returns {String}
      */
-    getSentence: function (dict, username) {
+    getSentence(dict, username) {
         if (!this.hasDict(dict)) {
             return 'Cannot make sentence...';
         }
         return this.dicts[dict].getSentence(username);
     }
-};
+}
+
+module.exports = Speak; // NODEONLY

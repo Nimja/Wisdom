@@ -1,5 +1,19 @@
+module.exports = {
+    'roll': {
+        config: {
+            description: 'Roll a die...',
+            options: [{
+                name: 'sides',
+                type: 'INTEGER',
+                description: 'Sides',
+                required: false,
+            }]
+        },
+        handler: handle
+    },
+}
 /**
- * Simple package to display the "who" message, as copyright, sort of.
+ * Fun diceroll!
  */
 const diceRolls = {
     "b1": ":x: False...", // Binary false.
@@ -20,22 +34,18 @@ const charLine = '┃'; // The left/right side lines.
 const charSpacer = ' '; //Space between line and dots.
 
 /**
- * The main export.
+ * The handler.
  */
-module.exports = function (cmd, env) {
-    // Important feature for people who think they're clever.
-    if (cmd.rest && cmd.rest.toLowerCase().trim().substr(0, 4) === 'over') {
-        env.channel.send("Only for Nimja.");
-        return;
-    }
+function handle(interaction) {
+    var rest = interaction.options.get('sides');
     // Get max
-    let max = getMax(cmd.rest);
+    let max = getMax(rest);
     // Get current value.
     let current = Math.floor(Math.random() * max) + 1;
     // Get the resulting message.
-    let message = (max == 2) ? rollBinary(current) : rollNormal(current,  max);
+    let message = (max == 2) ? rollBinary(current) : rollNormal(current, max);
     // Send to channel.
-    env.channel.send(message);
+    return message;
 };
 
 /**
@@ -47,7 +57,7 @@ module.exports = function (cmd, env) {
 function getMax(rest) {
     let max = 6;
     if (rest) {
-        let possibleMax = parseInt(rest.split(/\s/)[0]);
+        let possibleMax = rest.value;
         if (!isNaN(possibleMax) && possibleMax > 1) {
             max = possibleMax;
         }

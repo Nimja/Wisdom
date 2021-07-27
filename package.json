@@ -1,13 +1,14 @@
 {
   "name": "nimja.wisdom",
-  "version": "1.5.0",
+  "version": "13.0.0.dev1",
   "description": "The wonderful wanderer, who wills wisdom willingly.",
   "main": "wisdom.js",
   "author": "Nimja",
   "homepage": "https://wisdom.nimja.com/",
   "dependencies": {
-    "discord.js": "^12.4.1",
+    "discord.js": "^13.0.0-dev.4886ae2.1627300977",
     "node-schedule": "^2.0.0",
+    "nodemon": "^2.0.12",
     "request": "^2.88.2"
   },
   "keywords": [

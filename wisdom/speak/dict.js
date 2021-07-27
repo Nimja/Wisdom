@@ -1,18 +1,12 @@
-var isNode = typeof (window) === "undefined" && typeof (navigator) === "undefined";
-
 const KEY_SENTENCES = 'sentences';
 
-// Export if in nodejs.
-if (isNode) {
-    var SpeakArray = require('./array.js');
-}
+const SpeakArray = require('./array.js'); // NODEONLY
 
-var SpeakDict = function (dict) {
-    this.isValid = dict.hasOwnProperty(KEY_SENTENCES);
-    this.dict = this.prepareStructure(dict);
-};
-
-SpeakDict.prototype = {
+class SpeakDict {
+    constructor(dict) {
+        this.isValid = dict.hasOwnProperty(KEY_SENTENCES);
+        this.dict = this.prepareStructure(dict);
+    }
     /**
      * Speak dicts have the following structure
      *
@@ -21,7 +15,7 @@ SpeakDict.prototype = {
      * Level 1 - Order is kept, as it implies part of a sentence.
      * Level 2 - Pick random item.
      */
-    prepareStructure: function (dict) {
+    prepareStructure(dict) {
         for (let key in dict) {
             // Level 0, always random.
             let level0 = dict[key];
@@ -39,12 +33,11 @@ SpeakDict.prototype = {
                 }
             }
             // Level 0, we get a random item.
-            dict[key] = new SpeakArray(level0)
+            dict[key] = new SpeakArray(level0);
         }
         return dict;
-    },
-
-    getNextForKey: function (key) {
+    }
+    getNextForKey(key) {
         // Level 0, get random.
         let level0 = this.dict[key].getNext();
         if (Array.isArray(level0)) {
@@ -64,25 +57,24 @@ SpeakDict.prototype = {
         } else {
             return level0;
         }
-    },
-
+    }
     /**
      * Get a sentence, based on the different levels.
      *
      * @param {String} username
      * @return {String}
      */
-    getSentence: function (username) {
+    getSentence(username) {
         var t = this;
-        sentence = this.getNextForKey(KEY_SENTENCES);
-        let buffer = { // To make sure we don't replace things multiple times with different content.
+        var sentence = this.getNextForKey(KEY_SENTENCES);
+        let buffer = {
             'NAME': username,
             'SENTENCES': 'SENTENCES',
         };
         // Do 2 passes of replacing the variables, to allow for 1 level of recursion.
         for (var i = 0; i < 2; i++) {
             // Replace all CAPITALIZED words (of at least 2 letters) with the content (if needed).
-            sentence = sentence.replace(/([A-Z]{2,})/g, function(phrase) {
+            sentence = sentence.replace(/([A-Z]{2,})/g, function (phrase) {
                 // If we don't have it in the buffer, add it.
                 if (!buffer.hasOwnProperty(phrase)) {
                     let lphrase = phrase.toLowerCase();
@@ -103,7 +95,4 @@ SpeakDict.prototype = {
     }
 }
 
-// Export if in nodejs.
-if (isNode) {
-    module.exports = SpeakDict;
-}
+module.exports = SpeakDict; // NODEONLY
