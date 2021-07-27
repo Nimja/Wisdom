@@ -1,7 +1,7 @@
 module.exports = {
     'suggest': {
         config: {
-            description: 'Privately suggest (or report) something.',
+            description: 'Anonymously suggest (or report) something.',
             options: [{
                 name: 'content',
                 type: 'STRING',

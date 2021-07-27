@@ -20,7 +20,7 @@ class Commands {
     init(guild) {
         this.loadCommands();
         // Set global commands.
-        this.client.application.commands.set([]).catch(console.error);
+        this.client.application.commands.set(this.commandList).catch(console.error);
         // Set guild commands.
         this.client.application.commands.set(this.commandList, guild.id)
             // .then(console.log)
