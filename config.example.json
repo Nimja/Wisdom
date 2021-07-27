@@ -1,15 +1,6 @@
 {
     "token": "PUT_YOUR_TOKEN_FROM_DISCORD_HERE",
-    "admins": [
-        "PUT_ADMIN_USER_ID_HERE"
-    ],
     "report_user": "PUT_REPORT_USER_ID_HERE",
-    "prefix": "!",
     "bot_status": "invisible",
-    "timeout": 30,
-    "default_channel": "PUT_CHANNEL_ID_HERE",
-    "idle_channels": [
-        "PUT_CHANNEL_ID_HERE"
-    ],
-    "idle_timeout": 3600
+    "default_channel": "PUT_CHANNEL_ID_HERE"
 }
