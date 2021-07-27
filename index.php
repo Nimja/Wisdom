@@ -19,26 +19,34 @@
         }
 
         .buttons {
-            margin: 20px 20%;
+            margin: 20px auto;
+            width: 720px;
         }
 
         .buttons .group {
             float: left;
+            border: 1px solid #161c34;
+            border-radius: 5px;
+            background: #eee;
+            margin: 5px;
         }
 
         .buttons button {
             background: #405299;
             color: white;
             border: 1px solid #161c34;
-            font-size: 150%;
+            border-radius: 5px;
+            font-size: 125%;
             margin: 5px;
-            padding: 10px;
+            padding: 5px;
+            width: auto;
             display: block;
         }
 
         #count {
             border: 1px solid #161c34;
-            font-size: 150%;
+            border-radius: 5px;
+            font-size: 125%;
             padding: 10px;
             width: 45px;
         }
@@ -46,9 +54,23 @@
         #output {
             text-align: center;
             padding: 10px;
-            font-size: 150%;
-            margin: 20px 20%;
+            font-size: 125%;
+            margin: 20px auto;
+            width: 720px;
             border: 1px solid #161c34;
+            border-radius: 5px;
+        }
+
+        @media only screen and (max-width: 750px) {
+            .buttons {
+                margin: 20px 20px;
+                width: auto;
+            }
+
+            #output {
+                margin: 20px 20px;
+                width: auto;
+            }
         }
     </style>
 </head>
@@ -77,8 +99,9 @@
                 continue;
             }
             $name = pathinfo($file, PATHINFO_FILENAME);
-            $ucName = ucfirst($name);
-            $group = reset(explode('_', $name));
+            $parts = explode('_', $name);
+            $ucName = ucfirst(end($parts));
+            $group = reset($parts);
             if (!key_exists($group, $groups)) {
                 $groups[$group] = [];
             }
