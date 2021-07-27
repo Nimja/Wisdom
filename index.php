@@ -148,7 +148,7 @@
         );
     </script>
     <div class="copyright">
-        Copyright 2018 &copy; <a href="https://nimja.com">Nimja.com</a><br />
+        Copyright 2018-2021 &copy; <a href="https://nimja.com">Nimja.com</a><br />
     </div>
 </body>
 
