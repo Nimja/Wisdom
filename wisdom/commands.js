@@ -21,8 +21,8 @@ class Commands {
         this.loadCommands();
         // Set global commands.
         this.client.application.commands.set(this.commandList).catch(console.error);
-        // Set guild commands.
-        this.client.application.commands.set(this.commandList, guild.id)
+        // Set guild commands, the same commands will show twice!
+        this.client.application.commands.set([], guild.id)
             // .then(console.log)
             .catch(
                 e => { console.error(e, e.requestData); }

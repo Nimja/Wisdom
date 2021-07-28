@@ -66,14 +66,18 @@ const speak = new Speak();
 
 function handle(interaction) {
     var dict = interaction.commandName;
-    var channel = interaction.channel.name;
-    var dict_choice = `${dict}_${channel}`
-    if (speak.hasDict(dict_choice)) {
-        dict = dict_choice
-    }
     let displayName = interaction.user.username;
-    // We are in a guild, so get the member name.
+
+    // In a guild we allow for some extra options.
     if (interaction.guild) {
+        // Support for alternate dictionaries based on channel name.
+        var channel = interaction.channel.name;
+        var dict_choice = `${dict}_${channel}`
+        if (speak.hasDict(dict_choice)) {
+            dict = dict_choice
+        }
+
+        // Support for calling out users by their guild display name.
         displayName = interaction.member.displayName;
         const user = interaction.options.get('user');
         // Allow people to hug/bun/compliment others, but not bots.
