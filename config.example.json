@@ -2,5 +2,8 @@
     "token": "PUT_YOUR_TOKEN_FROM_DISCORD_HERE",
     "report_user": "PUT_REPORT_USER_ID_HERE",
     "bot_status": "invisible",
-    "default_channel": "PUT_CHANNEL_ID_HERE"
+    "default_channel": "PUT_CHANNEL_ID_HERE",
+    "channel_map": {
+        "CHANNEL_ID": "SPEAK_SUFFIX"
+    }
 }
