@@ -20,13 +20,13 @@ class Commands {
     init(guild) {
         this.loadCommands();
         // Set global commands.
-        this.client.application.commands.set(this.commandList).catch(console.error);
+        this.client.application.commands.set(this.commandList).then(commands => {
+            // Pass the commands through to the guild, so they are updated instantly.
+            this.client.application.commands.set(commands, guild.id).catch(console.error);
+        }
+        ).catch(console.error);
         // Set guild commands, the same commands will show twice!
-        this.client.application.commands.set([], guild.id)
-            // .then(console.log)
-            .catch(
-                e => { console.error(e, e.requestData); }
-            );
+
 
     }
     addCommand(name, command) {
