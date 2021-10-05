@@ -1,0 +1,14 @@
+{
+    "content": "Hello, I am Wisdom and this is some helpful information for you!",
+    "embeds": [
+        {
+            "color": 336699,
+            "fields": [
+                {
+                    "name": "Wisdom",
+                    "value": "A Discord bot for SERVER_NAME, you can use `/` to see the commands.\nType `/help` to see this message again."
+                }
+            ]
+        }
+    ]
+}

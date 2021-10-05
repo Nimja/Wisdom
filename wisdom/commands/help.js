@@ -2,27 +2,29 @@
 module.exports = {
     'help': {
         config: { description: 'Learn a bit more about the server' },
-        handler: handle
+        handler: handle,
+        getMessage: createWelcomeMessage
     },
 };
 
 const package = require('./../../package.json');
 
-function handle(interaction) {
-    return {
-        content: "Hi, I am Wisdom! Welcome to Nimja Hypnosis!",
-        ephemeral: true,
-        embeds: [{
-            "color": 4215449,
-            "fields": [
-                { name: "Rules", value: "Please read the #rules channel!" },
-                { name: "General", value: "When you're ready, say \"Hi!\" to everyone in the #general channel." },
-                { name: "Slash commands", value: "All the commands are explained, just like this one! Spamming bad. No spam." },
-                { name: "About Wisdom", value: "I prefer her/she more than it.\nI am happy to serve with a few cute functionalities." },
-                { name: "Version", value: package.version, inline: true },
-                { name: "Author", value: package.author, inline: true },
-            ]
-        }],
+// Create message.
+var message_template = require('../data/help_text.json');
+var fields = [
+    { name: "Wisdom pronoun", value: "She/her", inline: true },
+    { name: "Version", value: package.version, inline: true },
+    { name: "Author", value: package.author, inline: true },
+];
+// Add extra static fields.
+message_template.embeds[0].fields = message_template.embeds[0].fields.concat(fields);
 
-    }
+function handle(interaction) {
+    message = createWelcomeMessage();
+    message.ephemeral = true;
+    return message;
+}
+
+function createWelcomeMessage() {
+    return message_template
 }

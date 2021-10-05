@@ -7,7 +7,7 @@ const { Client, Intents } = require('discord.js');
 
 // Initialize Discord Bot
 console.log('Initializing...');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES] });
 const bot = new Bot(client, config);
 
 // Report errors, if/when they occur.
@@ -25,6 +25,12 @@ client.on('ready', () => {
 client.on('interactionCreate', interaction => {
     if (!interaction.isCommand()) return;
     bot.handleCommand(interaction);
+});
+
+// React to being added as a guild member (new user).
+client.on('guildMemberAdd', member => {
+    console.log(" - - Greeting - - ", member.displayName);
+    bot.handleNewMember(member);
 });
 
 // Do actual login.

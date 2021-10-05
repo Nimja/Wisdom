@@ -56,6 +56,13 @@ class Bot {
     handleCommand(interaction) {
         this.commands.handle(interaction);
     }
+
+    /**
+     * Pass the command handling to the commands class.
+     */
+    handleNewMember(member) {
+        this.commands.sendWelcome(member.user);
+    }
 };
 
 module.exports = Bot;

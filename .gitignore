@@ -2,6 +2,7 @@
 config.json
 .vscode
 wisdom/data/anniversaries.json
+wisdom/data/help_text.json
 
 # ----- NodeJS Ignores -----
 # Logs
