@@ -68,7 +68,7 @@ class Commands {
      */
     sendWelcome(user) {
         if (!user.bot) {
-            user.send(this.commands['help'].getMessage());
+            user.send(this.commands['help'].getMessage()).catch(error => { console.error("Failed to send welcome to " + user.username, error)});
         }
     }
 }
