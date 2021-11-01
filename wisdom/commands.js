@@ -59,7 +59,7 @@ class Commands {
         } else {
             var result = this.commands[interaction.commandName].handler(interaction);
         }
-        interaction.reply(result);
+        interaction.reply(result).catch(error => { console.error("Interaction failed?", error) });
     }
 
     /**
@@ -68,7 +68,7 @@ class Commands {
      */
     sendWelcome(user) {
         if (!user.bot) {
-            user.send(this.commands['help'].getMessage()).catch(error => { console.error("Failed to send welcome to " + user.username, error)});
+            user.send(this.commands['help'].getMessage()).catch(error => { console.error("Failed to send welcome to " + user.username, error) });
         }
     }
 }
