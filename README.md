@@ -5,6 +5,15 @@ A discord bot that has a few simple commands.
 
 [Example page for the speak dictionaries.](https://wisdom.nimja.com/)
 
+# Using Wisdom
+If you are on the Nimja Hypnosis Discord server, you only have to start typing: `/` and you will see all that is possible.
+
+
+# Running it yourself
+Feel free to make a copy, etc but please do credit me. Thank you!
+
+I've done my best to describe the instructions here, please contact me if anything is missing.
+
 ## Requirements
 
 * Nodejs.

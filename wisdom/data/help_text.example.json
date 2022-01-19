@@ -7,6 +7,10 @@
                 {
                     "name": "Wisdom",
                     "value": "A Discord bot for SERVER_NAME, you can use `/` to see the commands.\nType `/help` to see this message again."
+                },
+                {
+                    "name": "Source code",
+                    "value": "https://github.com/Nimja/Wisdom"
                 }
             ]
         }
