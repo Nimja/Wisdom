@@ -61,7 +61,6 @@ module.exports = {
 };
 
 const Speak = require('../speak/speak.js');
-const config = require('../../config.json');
 const Discord = require('discord.js');
 const speak = new Speak();
 
@@ -71,8 +70,8 @@ function handle(interaction) {
 
     // In a guild we allow for some extra options.
     if (interaction.guild) {
-        // Support for alternate dictionaries based on channel id/parentId.
-        var dict_choice = dict + '_' + getSuffix(interaction.channel)
+        // Support for alternate dictionaries based on channel name (or parent if thread).
+        var dict_choice = dict + '_' + interaction.text_channel_name
         if (speak.hasDict(dict_choice)) {
             dict = dict_choice
         }
@@ -86,19 +85,4 @@ function handle(interaction) {
         }
     }
     return speak.getSentence(dict, Discord.Util.escapeMarkdown(displayName));
-}
-
-/**
- * To support threads, we check the current ID AND the parentId.
- *
- * @param {*} channel
- * @returns
- */
-function getSuffix(channel) {
-    if (channel.id in config.channel_map) {
-        return config.channel_map[channel.id];
-    } else if (channel.parentId in config.channel_map) {
-        return config.channel_map[channel.parentId];
-    }
-    return '';
 }

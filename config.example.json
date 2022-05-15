@@ -3,7 +3,11 @@
     "report_user": "PUT_REPORT_USER_ID_HERE",
     "bot_status": "invisible",
     "default_channel": "PUT_CHANNEL_ID_HERE",
-    "channel_map": {
-        "CHANNEL_ID": "SPEAK_SUFFIX"
+    "blocked_commands": {
+        "channel_with_all_commands_blocked": true,
+        "channel_with_some_commands_blocked": [
+            "hug",
+            "question"
+        ]
     }
 }

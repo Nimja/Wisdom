@@ -1,5 +1,6 @@
 module.exports = {
     'roll': {
+        disabled: true,
         config: {
             description: 'Roll a die...',
             options: [{
