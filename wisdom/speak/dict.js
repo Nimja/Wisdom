@@ -53,7 +53,7 @@ class SpeakDict {
                 }
             }
             // Join the result, replacing whitespace with a single space.
-            return result.join(' ').replace(/\s([.,?!])/g, '$1');
+            return result.join(' ').replace(/\s+([.,?!])/g, '$1').replace(/\s{2,}/g, ' ');
         } else {
             return level0;
         }

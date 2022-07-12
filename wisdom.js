@@ -1,5 +1,6 @@
 // Load configuration.
 const config = require('./config.json');
+require('./wisdom/log_timestamp.js');
 
 // Load libraries.
 const Bot = require('./wisdom/bot.js');

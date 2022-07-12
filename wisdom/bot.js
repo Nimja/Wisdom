@@ -37,6 +37,8 @@ class Bot {
                 global.setData('reportChannel', channel);
                 this.commands.init(channel.guild);
                 this.anniversary = new Anniversary(this.client, channel);
+                // To trigger cleanup, for now let's do this manual check sometimes.
+                // this.anniversary.cleanRolesWithoutAnniversary();
                 // Schedule the daily update.
                 schedule.scheduleJob('0 11 * * *', this.daily.bind(this));
                 // Report.
