@@ -5,7 +5,6 @@
             [
                 "ADJECTIVE SESSION WITH PERSON.",
                 "ADJECTIVE SESSION WITH PERSON LOCATION.",
-                "ADVERB VERBED PERSON LOCATION.",
                 "ADVERB VERBED WITH PERSON.",
                 "ADVERB VERBED WITH PERSON LOCATION."
             ]
@@ -71,7 +70,9 @@
         "brainwashed",
         "caged",
         "caned",
+        "caressed",
         "cuddled",
+        "denied",
         "drugged",
         "flirted",
         "fucked",
@@ -83,6 +84,7 @@
         "penetrated",
         "petted",
         "pinned down",
+        "scratched",
         "snuggled",
         "spanked",
         "teased",

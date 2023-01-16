@@ -12,12 +12,9 @@
                 "PROBABLY",
                 "PROBABLY",
                 "PROBABLY",
-
                 "UNCLEAR",
-
                 "NEGATIVE",
                 "TENTATIVE",
-
                 "^YESNO, UNLESS.",
                 "^YESNO, LIKELY."
             ]
@@ -98,7 +95,7 @@
         "I flipped a coin",
         "so say the cards",
         "I rolled 1d6",
-        "as I devined",
+        "as I divined",
         "should be"
     ],
     "definitely": [
@@ -149,7 +146,6 @@
         "I'm a bit tired.",
         "I wish I knew.",
         "I'm not sure.",
-
         "If you want to take that risk...",
         "It could be...",
         "Possibly...",
