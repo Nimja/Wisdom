@@ -4,11 +4,20 @@ require('./wisdom/log_timestamp.js');
 
 // Load libraries.
 const Bot = require('./wisdom/bot.js');
-const { Client, Intents } = require('discord.js');
+const { Client, GatewayIntentBits } = require('discord.js');
 
 // Initialize Discord Bot
 console.log('Initializing...');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.DIRECT_MESSAGES] });
+const client = new Client(
+    {
+        intents: [
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.GuildMembers,
+            GatewayIntentBits.GuildMessages,
+            GatewayIntentBits.DirectMessages
+        ]
+    }
+);
 const bot = new Bot(client, config);
 
 // Report errors, if/when they occur.

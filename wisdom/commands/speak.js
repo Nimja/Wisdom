@@ -66,7 +66,7 @@ const speak = new Speak();
 
 function handle(interaction) {
     var dict = interaction.commandName;
-    let displayName = interaction.user.username;
+    let displayName = interaction.user.displayName ? interaction.user.displayName : interaction.user.username;
 
     // In a guild we allow for some extra options.
     if (interaction.guild) {
@@ -77,12 +77,13 @@ function handle(interaction) {
         }
 
         // Support for calling out users by their guild display name.
-        displayName = interaction.member.displayName;
+        let member = interaction.member;
         const user = interaction.options.get('user');
         // Allow people to hug/bun/compliment others, but not bots.
         if (user && !user.user.bot) {
-            displayName = user.member.displayName;
+            member = user.member;
         }
+        displayName = member.displayName ? member.displayName : member.user.username;
     }
-    return speak.getSentence(dict, Discord.Util.escapeMarkdown(displayName));
+    return speak.getSentence(dict, Discord.escapeMarkdown(displayName));
 }

@@ -18,7 +18,7 @@ class Speak {
             const fs = require('fs');
             const commandFiles = fs.readdirSync('./wisdom/dicts').filter(file => file.endsWith('.json'));
             for (const file of commandFiles) {
-                var baseName = file.substr(0, file.lastIndexOf('.'));
+                var baseName = file.substring(0, file.lastIndexOf('.'));
                 // Include file.
                 var dict = require('../dicts/' + file);
                 var speakDict = new SpeakDict(dict);

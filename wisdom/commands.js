@@ -91,7 +91,11 @@ class Commands {
         let name = channel.name;
         // If we are in a thread, we want to the name of the parent channel.
         if (channel.constructor.name == 'ThreadChannel') {
-            name = channel.parent.name;
+            if (!channel.parent) {
+                console.log(channel);
+            } else {
+                name = channel.parent.name;
+            }
         }
         return name;
     }
