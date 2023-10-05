@@ -13,6 +13,7 @@ class Bot {
         this.reportUserId = config.report_user;
         this.reportUser;
         this.defaultChannelId = config.default_channel;
+        this.reportChannelId = config.report_channel;
         this.channel;
         this.commands = new Commands(client);
 
@@ -24,27 +25,47 @@ class Bot {
     init() {
         this.client.user.setStatus(this.status);
         // Setup report user.
-        this.client.users.fetch(this.reportUserId).then(
-            user => {
-                global.setData('reportUser', user);
-                // Report.
-                console.log('Reporting to: ' + user.username);
-            }
-        )
+        if (this.reportUserId) {
+            this.client.users.fetch(this.reportUserId).then(
+                user => {
+                    global.setData('reportUser', user);
+                    // Report.
+                    console.log('Reporting DM : ' + user.username);
+                }
+            );
+        } else {
+            console.log('Reporting DM : NOT CONFIGURED');
+        }
+        // Setup report communication channel.
+        if (this.reportChannelId) {
+            this.client.channels.fetch(this.reportChannelId).then(
+                channel => {
+                    global.setData('reportChannel', channel);
+                    // Report.
+                    console.log('Reporting to : ' + channel.name);
+                }
+            );
+        } else {
+            console.log('Reporting to : NOT CONFIGURED');
+        }
         // Setup main communication channel.
-        this.client.channels.fetch(this.defaultChannelId).then(
-            channel => {
-                global.setData('reportChannel', channel);
-                this.commands.init(channel.guild);
-                this.anniversary = new Anniversary(this.client, channel);
-                // To trigger cleanup, for now let's do this manual check sometimes.
-                // this.anniversary.cleanRolesWithoutAnniversary();
-                // Schedule the daily update.
-                schedule.scheduleJob('0 11 * * *', this.daily.bind(this));
-                // Report.
-                console.log('Sending to  : ' + channel.name);
-            }
-        );
+        if (this.defaultChannelId) {
+            this.client.channels.fetch(this.defaultChannelId).then(
+                channel => {
+                    global.setData('mainChannel', channel);
+                    this.commands.init(channel.guild);
+                    this.anniversary = new Anniversary(this.client, channel);
+                    // To trigger cleanup, for now let's do this manual check sometimes.
+                    // this.anniversary.cleanRolesWithoutAnniversary();
+                    // Schedule the daily update.
+                    schedule.scheduleJob('0 11 * * *', this.daily.bind(this));
+                    // Report.
+                    console.log('Main messages: ' + channel.name);
+                }
+            );
+        } else {
+            console.log('Main messages: NOT CONFIGURED');
+        }
     }
     /**
      * Daily jobs, this allows for actions not tied to a message.

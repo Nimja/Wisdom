@@ -1,7 +1,8 @@
 {
     "token": "PUT_YOUR_TOKEN_FROM_DISCORD_HERE",
-    "report_user": "PUT_REPORT_USER_ID_HERE",
     "bot_status": "invisible",
+    "report_user": "PUT_REPORT_USER_ID_HERE",
+    "report_channel": "PUT_REPORT_CHANNEL_ID_HERE",
     "default_channel": "PUT_CHANNEL_ID_HERE",
     "roles_with_anniversary": [],
     "blocked_commands": {

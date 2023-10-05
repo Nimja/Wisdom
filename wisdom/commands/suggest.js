@@ -1,14 +1,16 @@
+const { SlashCommandBuilder } = require('discord.js');
+
 module.exports = {
     'suggest': {
-        config: {
-            description: 'Anonymously suggest (or report) something.',
-            options: [{
-                name: 'content',
-                type: 'STRING',
-                description: 'Content',
-                required: true,
-            }]
-        },
+        config: new SlashCommandBuilder()
+            .setName('suggest')
+            .setDescription('Anonymously suggest (or report) something.')
+            .addStringOption(option =>
+                option.setName('content')
+                    .setDescription('Your message.')
+                    .setRequired(true)
+            )
+            .toJSON(),
         handler: handle
     },
 }
@@ -24,12 +26,17 @@ function quote(text) {
 function handle(interaction) {
     var rest = interaction.options.get('content');
     rest = rest ? rest.value.trim() : '';
-    var reportUser = global.getData('reportUser');
-    if (!reportUser) {
-        return reply("Sorry, currently not working...")
-    }
     var quoted = quote(rest);
-    reportUser.send("Suggestion: " + quoted);
+    // Report in admin DM.
+    var reportUser = global.getData('reportUser');
+    if (reportUser) {
+        reportUser.send("Suggestion: " + quoted);
+    }
+    // Report in server channel.
+    var reportChannel = global.getData('reportChannel');
+    if (reportChannel) {
+        reportChannel.send("Suggestion: " + quoted);
+    }
     return reply("Thank you, I've passed it through: " + quoted);
 };
 

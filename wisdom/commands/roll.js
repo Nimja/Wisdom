@@ -1,15 +1,17 @@
+const { SlashCommandBuilder } = require('discord.js');
+
 module.exports = {
     'roll': {
         disabled: true,
-        config: {
-            description: 'Roll a die...',
-            options: [{
-                name: 'sides',
-                type: 'INTEGER',
-                description: 'Sides',
-                required: false,
-            }]
-        },
+        config: new SlashCommandBuilder()
+            .setName('file')
+            .setDescription('Roll a die...')
+            .addIntegerOption(option =>
+                option.setName('sides')
+                    .setDescription('Number of sides.')
+                    .setRequired(false)
+            )
+            .toJSON(),
         handler: handle
     },
 }

@@ -1,16 +1,16 @@
-
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
     'file': {
-        config: {
-            description: 'Get information for a file',
-            options: [{
-                name: 'file',
-                type: 'STRING',
-                description: 'File',
-                required: true,
-            }]
-        },
+        config: new SlashCommandBuilder()
+            .setName('file')
+            .setDescription('Get information for a file.')
+            .addStringOption(option =>
+                option.setName('file')
+                    .setDescription('Text in title/description.')
+                    .setRequired(true)
+            )
+            .toJSON(),
         handler: handle
     },
 }
@@ -137,6 +137,20 @@ function formatFile(filter, file) {
     applyFilterTags(filter.category, ['Category', 'Categories'], file.tags, embed);
     applyFilterTags(filter.feature, ['Feature', 'Features'], file.tags, embed);
     message.embeds = [embed];
+    // Button to file links.
+    message.components = [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "label": "Open details page",
+                    "style": 5,
+                    "url": file.links.details
+                }
+            ]
+        }
+    ]
     return message;
 }
 

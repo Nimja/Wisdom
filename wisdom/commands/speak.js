@@ -1,60 +1,66 @@
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
     'decide': {
-        config: { description: 'A yes/no decision' },
+        config: new SlashCommandBuilder()
+            .setName('decide')
+            .setDescription('A yes/no decision')
+            .toJSON(),
         handler: handle
     },
     'question': {
-        config: { description: 'Get a random question?' },
+        config: new SlashCommandBuilder()
+            .setName('question')
+            .setDescription('Get a random question?')
+            .toJSON(),
         handler: handle
     },
     'dream': {
-        config: {
-            description: 'Allow wisdom to inspire you a dream.',
-            options: [{
-                name: 'user',
-                type: 'USER',
-                description: 'Dreamer',
-                required: false,
-            }]
-        },
+        config: new SlashCommandBuilder()
+            .setName('dream')
+            .setDescription('Allow wisdom to inspire you a dream.')
+            .addUserOption(option =>
+                option.setName('user')
+                    .setDescription('Dreamer?')
+                    .setRequired(false)
+            )
+            .toJSON(),
         handler: handle
     },
     'bun': {
-        config: {
-            description: 'Throw a bunny as pun-ishment.',
-            options: [{
-                name: 'user',
-                type: 'USER',
-                description: 'Target',
-                required: true,
-            }]
-        },
+        config: new SlashCommandBuilder()
+            .setName('bun')
+            .setDescription('Throw a bunny as pun-ishment.')
+            .addUserOption(option =>
+                option.setName('user')
+                    .setDescription('Target')
+                    .setRequired(true)
+            )
+            .toJSON(),
         handler: handle
     },
     'hug': {
-        config: {
-            description: 'Give someone a hug.',
-            options: [{
-                name: 'user',
-                type: 'USER',
-                description: 'Who',
-                required: true,
-            }]
-        },
+        config: new SlashCommandBuilder()
+            .setName('hug')
+            .setDescription('Give someone a hug.')
+            .addUserOption(option =>
+                option.setName('user')
+                    .setDescription('Who gets a hug?')
+                    .setRequired(true)
+            )
+            .toJSON(),
         handler: handle
     },
     'compliment': {
-        config: { description: '' },
-        config: {
-            description: 'Give a random compliment.',
-            options: [{
-                name: 'user',
-                type: 'USER',
-                description: 'To',
-                required: true,
-            }]
-        },
+        config: new SlashCommandBuilder()
+            .setName('compliment')
+            .setDescription('Give someone a compliment.')
+            .addUserOption(option =>
+                option.setName('user')
+                    .setDescription('Who\'s been good?')
+                    .setRequired(true)
+            )
+            .toJSON(),
         handler: handle
     },
 
@@ -66,7 +72,7 @@ const speak = new Speak();
 
 function handle(interaction) {
     var dict = interaction.commandName;
-    let displayName = interaction.user.displayName ? interaction.user.displayName : interaction.user.username;
+    let displayName = interaction.user.displayName || interaction.user.username;
 
     // In a guild we allow for some extra options.
     if (interaction.guild) {
@@ -80,10 +86,11 @@ function handle(interaction) {
         let member = interaction.member;
         const user = interaction.options.get('user');
         // Allow people to hug/bun/compliment others, but not bots.
-        if (user && !user.user.bot) {
+        if (user && !user.user.bot && user.member) {
             member = user.member;
         }
-        displayName = member.displayName ? member.displayName : member.user.username;
+        // Pick the first name that is good.
+        displayName = member.nickname || member.displayName || member.user.displayName || member.user.username;
     }
     return speak.getSentence(dict, Discord.escapeMarkdown(displayName));
 }

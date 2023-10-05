@@ -1,7 +1,11 @@
+const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
     'help': {
-        config: { description: 'Learn a bit more about the server' },
+        config: new SlashCommandBuilder()
+            .setName('help')
+            .setDescription('Learn a bit more about the server.')
+            .toJSON(),
         handler: handle,
         getMessage: createWelcomeMessage
     },

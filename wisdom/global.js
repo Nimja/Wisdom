@@ -12,7 +12,11 @@ class Global {
      * @returns {any}
      */
     getData(key) {
-        return Global.data[key];
+        if (key in Global.data) {
+            return Global.data[key];
+
+        }
+        return null;
     }
     /**
      * Set data item by key.
