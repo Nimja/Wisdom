@@ -66,6 +66,10 @@ module.exports = {
 
 };
 
+if (global.isConsole) { // Don't start the scheduler or any rest.
+    return;
+}
+
 const Speak = require('../speak/speak.js');
 const Discord = require('discord.js');
 const speak = new Speak();

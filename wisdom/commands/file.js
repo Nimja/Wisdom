@@ -15,11 +15,14 @@ module.exports = {
     },
 }
 
-const request = require('request');
+if (global.isConsole) { // Don't start the scheduler or any rest.
+    return;
+}
+
+const bent = require('bent')
 const schedule = require('node-schedule');
 
 schedule.scheduleJob('2 20 * * *', updateCache);
-
 
 var cache = {}; // Local cache, to avoid having to do network requests every search.
 
@@ -217,15 +220,10 @@ function applyOtherTags(tags, filetags, embed) {
  * Update the cache, this calls the Nimja Hypnosis site to get all the file data.
  */
 function updateCache() {
-    request('https://hypno.nimja.com/app', function (error, response, body) {
-        if (error) {
-            console.log(error);
-        }
-        var data = JSON.parse(body);
-        if (data) {
-            cache = data;
-            parseCacheForSearchAndLookup();
-        }
+    const getJSON = bent('json')
+    getJSON('https://hypno.nimja.com/app').then((data) => {
+        cache = data;
+        parseCacheForSearchAndLookup();
     });
 }
 

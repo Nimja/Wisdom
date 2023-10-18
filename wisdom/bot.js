@@ -53,7 +53,7 @@ class Bot {
             this.client.channels.fetch(this.defaultChannelId).then(
                 channel => {
                     global.setData('mainChannel', channel);
-                    this.commands.init(channel.guild);
+                    this.commands.init();
                     this.anniversary = new Anniversary(this.client, channel);
                     // To trigger cleanup, for now let's do this manual check sometimes.
                     // this.anniversary.cleanRolesWithoutAnniversary();

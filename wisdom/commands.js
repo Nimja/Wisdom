@@ -18,10 +18,9 @@ class Commands {
         }
     }
 
-    init(guild) {
+    init() {
+        // Load commands so the handling is available.
         this.loadCommands();
-        // Fetch all commands we have, then heck if we need to do things.
-        this.client.application.commands.fetch().then(this.syncCommands.bind(this));
     }
     addCommand(name, command) {
         command.config.name = name;
@@ -30,37 +29,6 @@ class Commands {
             this.activeCommands.push(name);
         }
         return command;
-    }
-
-    /**
-     * This is called when we get all commands.
-     * @param {*} discordCommands
-     */
-    syncCommands(discordCommands) {
-        var requested = this.activeCommands.slice();
-        var changed = false;
-        discordCommands.forEach(discordCommand => {
-            let name = discordCommand.name;
-            let index = requested.indexOf(name);
-            if (index < 0) {
-                // Removed from command list.
-                console.log("REMOVING command:", name);
-                this.client.application.commands.delete(discordCommand).catch(console.error);
-                changed = true;
-            } else {
-                // Remove from requested.
-                requested.splice(index, 1);
-            }
-        });
-        // Adding new/missing commands.
-        requested.forEach(name => {
-            console.log("ADDING command  : ", name);
-            this.client.application.commands.create(this.commands[name].config).catch(console.error);
-            changed = true;
-        });
-        if (changed) {
-            console.log("Sync complete!");
-        }
     }
 
     handle(interaction) {
@@ -77,7 +45,9 @@ class Commands {
             // Let the handler do it.
             var result = this.commands[interaction.commandName].handler(interaction);
         }
-        interaction.reply(result).catch(error => { console.error("Interaction failed?", error) });
+        if (!!result) {
+            interaction.reply(result).catch(error => { console.error("Interaction failed?", error) });
+        }
     }
 
     /**
@@ -110,7 +80,6 @@ class Commands {
                 // This specific command is blocked in this channel.
                 return true;
             }
-
         }
         return false;
     }
@@ -122,7 +91,6 @@ class Commands {
         return {
             "content": msg,
             "ephemeral": true,
-
         };
     }
 

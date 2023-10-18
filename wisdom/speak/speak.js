@@ -1,4 +1,4 @@
-var isNode = typeof (window) === "undefined" && typeof (navigator) === "undefined";
+var isNode = typeof (window) === "undefined" && typeof (global) !== "undefined";
 
 var SpeakDict = require('./dict.js'); // NODEONLY
 
