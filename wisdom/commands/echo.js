@@ -7,7 +7,7 @@ module.exports = {
         guild: true,
         config: new SlashCommandBuilder()
             .setName('echo')
-            .setDescription('Send a text as Wisdom to the current channel.')
+            .setDescription('Send a text as Wisdom to the selected channel.')
             .addChannelOption(option =>
                 option.setName('channel')
                     .setDescription('Which channel to post it in.')
