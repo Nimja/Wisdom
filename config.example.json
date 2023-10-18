@@ -2,9 +2,9 @@
     "token": "PUT_YOUR_TOKEN_FROM_DISCORD_HERE",
     "bot_user_id": "PUT_BOT_USER_ID_HERE",
     "bot_status": "invisible",
-    "guild_id": "PUT_GUILD_ID_HERE_FOR_ECHO - Or leave this option out.",
+    "guild_id": "PUT_GUILD_ID_HERE_FOR_ECHO",
     "report_user": "PUT_REPORT_USER_ID_HERE - Or leave this option out.",
-    "report_channel": "PUT_REPORT_CHANNEL_ID_HERE",
+    "report_channel": "PUT_REPORT_CHANNEL_ID_HERE - Or leave this option out.",
     "default_channel": "PUT_CHANNEL_ID_HERE",
     "roles_with_anniversary": [],
     "blocked_commands": {

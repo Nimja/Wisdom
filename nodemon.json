@@ -1,5 +1,6 @@
 {
     "ignore": [
-        "console/**"
+        "console/**",
+        "config.example.json"
     ]
 }
