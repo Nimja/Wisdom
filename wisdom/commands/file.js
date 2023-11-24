@@ -126,12 +126,15 @@ function formatNotFound(searchText) {
  */
 function formatFile(filter, file) {
     let message = {
-        content: file.name + ' - ' + file.links.details,
+        content: "This is what I found:\n" +
+            "# " + file.name +
+            "\n" + file.links.details,
         ephemeral: true,
     };
     var embed = {
         "color": 4215449,
         "fields": [
+            { name: 'Name', value: file.name },
             { name: 'Description', value: file.description },
             { name: 'Intended effect', value: file.intended },
             { name: 'Length', value: secondsToTime(file.length), inline: true }
