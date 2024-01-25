@@ -13,5 +13,8 @@
             "hug",
             "question"
         ]
+    },
+    "command_timeouts": {
+        "question": 120
     }
 }

@@ -6,6 +6,7 @@ class Commands {
         this.client = client;
         this.commands = {};
         this.activeCommands = [];
+        this.commandTimeouts = {};
     }
     loadCommands() {
         const commandFiles = fs.readdirSync('./wisdom/commands').filter(file => file.endsWith('.js'));
@@ -34,16 +35,25 @@ class Commands {
     handle(interaction) {
         // Set property for text channel names, so others can use this if needed.
         interaction.text_channel_name = this.getChannelName(interaction.channel);
+        let isDm = !interaction.channel ? true : interaction.channel.isDMBased();
+        let result = false;
         // Check if command is known and allowed.
         if (!(interaction.commandName in this.commands)) {
             // Not known, So return to user.
-            var result = this.returnPrivate('Unknown command...');
+            result = this.returnPrivate('Unknown command...');
         } else if (this.checkBlocked(interaction.commandName, interaction.text_channel_name)) {
             // Not allowed, so return to user.
-            var result = this.returnPrivate('Command not available in this channel.');
+            result = this.returnPrivate('Command not available in this channel.');
         } else {
-            // Let the handler do it.
-            var result = this.commands[interaction.commandName].handler(interaction);
+            // Check timeout on command.
+            if (!isDm) {
+                result = this.checkTimeout(interaction.commandName, interaction.user.id);
+            }
+
+            if (!result) {
+                // Let the handler do it.
+                result = this.commands[interaction.commandName].handler(interaction);
+            }
         }
         if (!!result) {
             interaction.reply(result).catch(error => { console.error("Interaction failed?", error) });
@@ -82,6 +92,52 @@ class Commands {
             }
         }
         return false;
+    }
+
+    checkTimeout(commandName, userId) {
+        let ts = Math.floor(Date.now() / 1000);
+        let toRemove = [];
+        // Get expired keys.
+        for (let i in this.commandTimeouts) {
+            if (this.commandTimeouts[i] <= ts) {
+                toRemove.push(i);
+            }
+        }
+        // Clear.
+        for (let i of toRemove) {
+            delete this.commandTimeouts[i];
+        }
+        // Command is not tracked.
+        if (commandName in wisdomConfig.command_timeouts === false) {
+            return false;
+        }
+        // Set the key.
+        let key = commandName + "." + userId.toString();
+        // User is in timeout.
+        if (key in this.commandTimeouts) {
+            let seconds = this.commandTimeouts[key] - ts;
+            let msg = "You have to wait " + this.formatTime(seconds) + " until you can use that command again.";
+            return this.returnPrivate(msg);
+        }
+        // Set a new timeout for this command/user.
+        this.commandTimeouts[key] = ts + wisdomConfig.command_timeouts[commandName];
+        return false;
+    }
+
+    formatTime(seconds) {
+        let result = [];
+        let hours = Math.floor(seconds / 3600);
+        if (hours > 0) {
+            seconds -= hours * 3600;
+            result.push(hours + "h");
+        }
+        let minutes = Math.floor(seconds / 60);
+        if (hours > 0 || minutes > 0) {
+            seconds -= minutes * 60;
+            result.push(minutes + "m");
+        }
+        result.push(seconds + "s");
+        return result.join("");
     }
 
     /**
