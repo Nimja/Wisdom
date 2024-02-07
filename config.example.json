@@ -6,6 +6,7 @@
     "report_user": "PUT_REPORT_USER_ID_HERE - Or leave this option out.",
     "report_channel": "PUT_REPORT_CHANNEL_ID_HERE - Or leave this option out.",
     "default_channel": "PUT_CHANNEL_ID_HERE",
+    "anniversaries_enabled": true,
     "roles_with_anniversary": [],
     "blocked_commands": {
         "channel_with_all_commands_blocked": true,

@@ -10,11 +10,12 @@ class Bot {
         this.client = client;
         this.status = config.bot_status;
         this.admins = config.admins;
+        this.taskAnniversaryEnabled = config.anniversaries_enabled;
         this.reportUserId = config.report_user;
-        this.reportUser;
+        this.reportUser = false;
         this.defaultChannelId = config.default_channel;
         this.reportChannelId = config.report_channel;
-        this.channel;
+        this.channel = false;
         this.commands = new Commands(client);
 
     }
@@ -71,7 +72,9 @@ class Bot {
      * Daily jobs, this allows for actions not tied to a message.
      */
     daily() {
-        this.anniversary.callout();
+        if (this.taskAnniversaryEnabled) {
+            this.anniversary.callout();
+        }
     }
     /**
      * Pass the command handling to the commands class.
