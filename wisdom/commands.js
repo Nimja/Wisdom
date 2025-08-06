@@ -56,7 +56,9 @@ class Commands {
             }
         }
         if (!!result) {
-            interaction.reply(result).catch(error => { console.error("Interaction failed?", error) });
+            interaction.reply(result).catch(
+                error => { console.error("Interaction failed? - ", error, interaction) }
+            );
         }
     }
 
