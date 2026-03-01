@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
     'help': {
@@ -25,7 +25,7 @@ message_template.embeds[0].fields = message_template.embeds[0].fields.concat(fie
 
 function handle(interaction) {
     message = createWelcomeMessage();
-    message.ephemeral = true;
+    message.flags = MessageFlags.Ephemeral;
     return message;
 }
 

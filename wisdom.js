@@ -43,7 +43,7 @@ if (argv.length > 0 && argv[0]) { // For single commands.
     });
 
     // Reporting we have connected.
-    client.on('ready', () => {
+    client.on('clientReady', () => {
         console.log(`Logged in as: ${client.user.tag}`);
         bot.init();
     });

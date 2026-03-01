@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
     'file': {
@@ -94,7 +94,7 @@ function searchFile(searchText) {
 function formatNotFound(searchText) {
     let message = {
         content: "I couldn't find anything for: " + searchText,
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
     };
     let embed = {
         "color": 4215449,
@@ -129,7 +129,7 @@ function formatFile(filter, file) {
         content: "This is what I found:\n" +
             "# " + file.name +
             "\n" + file.links.details,
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
     };
     var embed = {
         "color": 4215449,

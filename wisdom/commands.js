@@ -1,3 +1,4 @@
+const { MessageFlags } = require('discord.js');
 const fs = require('fs');
 const wisdomConfig = require('../config.json');
 
@@ -148,7 +149,7 @@ class Commands {
     returnPrivate(msg) {
         return {
             "content": msg,
-            "ephemeral": true,
+            "flags": MessageFlags.Ephemeral,
         };
     }
 

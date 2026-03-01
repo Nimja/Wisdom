@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
     'suggest': {
@@ -50,5 +50,5 @@ function handle(interaction) {
 
 
 function reply(msg) {
-    return { ephemeral: true, content: msg }
+    return { content: msg, flags: MessageFlags.Ephemeral }
 }

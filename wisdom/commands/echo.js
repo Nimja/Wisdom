@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const wait = require('node:timers/promises').setTimeout;
 
 module.exports = {
@@ -57,7 +57,7 @@ async function handleEcho(interaction, channel, text) {
 
 
 function reply(msg) {
-    return { ephemeral: true, content: msg }
+    return { content: msg, flags: MessageFlags.Ephemeral }
 }
 
 function quote(text) {
