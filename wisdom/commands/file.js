@@ -35,7 +35,9 @@ function handle(interaction) {
     searchText = cleanRegex(searchText);
     var filter = cache.content.filter;
     var file = false;
-    if (searchText === 'last') {
+    if (searchText === 'help') {
+        return getHelpText();
+    } else if (searchText === 'last') {
         file = cache.content.files[0]
     } else if (searchText.length > 0) {
         if (searchText.match(/^[0-9]+$/)) { // All numbers, assume file.
@@ -60,7 +62,7 @@ function handle(interaction) {
  * Clean up the search from regex characters that can break.
  */
 function cleanRegex(searchText) {
-    return searchText.toString().replace(/[\(\)\[\]\?]/gm, ' ');
+    return searchText.toString().replace(/[\(\)\[\]\{\}\?\\]/gm, ' ');
 }
 
 /**
@@ -93,32 +95,54 @@ function searchFile(searchText) {
 
 function formatNotFound(searchText) {
     let message = {
-        content: "I couldn't find anything for: " + searchText,
+        content: "I couldn't find anything for: `" + searchText + "`",
         flags: MessageFlags.Ephemeral,
     };
-    let embed = {
+    message.embeds = [getHelpEmbed()];
+    return message;
+
+}
+
+function getHelpText() {
+    let message = {
+        content: "This is how you can use the `/file` command:",
+        flags: MessageFlags.Ephemeral,
+    };
+    message.embeds = [getHelpEmbed()];
+    return message;
+}
+
+function getHelpEmbed() {
+    return {
         "color": 4215449,
         "fields": [
-            { name: 'Help', value: "You can search using parts of words and very basic regex (no brackets)" },
-            {
-                name: 'File number', value: [
-                    "A file number on its own is assumed to be one of the normal files.",
-                    "`10` for '10 - Fun...'",
+            { name: 'Ways to search', value: [
+                    "All commands below are what you type after `/file`",
+                    "You can search by number, short code or text.",
+                    "Here are some examples:",
                 ].join("\n")
             },
             {
-                name: 'Short codes', value: [
-                    "Use short-codes (same as playlist url) to find specific files:",
-                    "`f10` for '10 - Fun...'",
-                    "`l10` for 'Live 10 - Brainwashing...'",
-                    "`i10` for 'Live Light 10 - Incubus...'",
+                name: 'Search by number / short code', value: [
+                    "`23` or `f23` for file 23 - Cute Kitty",
+                    "`l23` for Live 23 - Brainwashing Laboratory",
+                    "`i23` for Live Light 23 - Satyr Seduction",
+                ].join("\n")
+            },
+            {
+                name: 'Search by text', value: [
+                    "`relax` for the most recent file with that word in the title.",
+                    "`.*ing` basic regex is allowed.",
+                ].join("\n")
+            },
+            {
+                name: 'Special commands', value: [
+                    "`help` for for this text.",
+                    "`last` for the most recent / latest release.",
                 ].join("\n")
             },
         ]
     }
-    message.embeds = [embed];
-    return message;
-
 }
 
 /**
