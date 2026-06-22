@@ -32,6 +32,8 @@ Most values should be self explenatory.
 * Run: `cp config.example.json config.json` - Copies example config to config, needs to be edited!
 * Run: `node wisdom`
 
+It also supports nodemon, which makes sure the bot stays active. This would be thorugh `nodemon wisdom`.
+
 # Bot commands
 Each of the bot commands is kept in the related JS file in `wisdom/commands/*.js`
 The speak dictionaries are kept in the related JSON files in `wisdom/dicts/*.json`

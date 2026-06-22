@@ -4,7 +4,7 @@ module.exports = {
     'roll': {
         disabled: true,
         config: new SlashCommandBuilder()
-            .setName('file')
+            .setName('roll')
             .setDescription('Roll a die...')
             .addIntegerOption(option =>
                 option.setName('sides')

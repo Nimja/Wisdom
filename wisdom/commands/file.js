@@ -4,10 +4,10 @@ module.exports = {
     'file': {
         config: new SlashCommandBuilder()
             .setName('file')
-            .setDescription('Get information for a file.')
+            .setDescription('Get file information on a file. To see how, use: /file help')
             .addStringOption(option =>
-                option.setName('file')
-                    .setDescription('Text in title/description.')
+                option.setName('text')
+                    .setDescription('Text in title or file number.')
                     .setRequired(true)
             )
             .toJSON(),
@@ -29,7 +29,7 @@ var cache = {}; // Local cache, to avoid having to do network requests every sea
 updateCache();
 
 function handle(interaction) {
-    var searchText = interaction.options.get('file');
+    var searchText = interaction.options.get('text');
     searchText = searchText ? searchText.value.toLowerCase().trim() : '';
 
     searchText = cleanRegex(searchText);
